@@ -1,11 +1,10 @@
-<h1>YouTube downloader built with React & Node.js</h1>
+<h1 align="center">YouTube downloader built with React & Node.js</h1>
 
 <p align="center">
 Just paste a link or search to download your video. The available formats are mp4, mp3, mov and flv.
 </p>
 
 ## Features
-
 - Built in search
 - 4 formats 🤘
 - Fast in grabbing information and downloading 🚀
