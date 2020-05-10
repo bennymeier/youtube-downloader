@@ -1,0 +1,22 @@
+{
+  "name": "yt-downloader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "content-disposition": "^0.5.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "youtube-api-v3-search": "^1.2.1",
+    "ytdl-core": "^2.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
