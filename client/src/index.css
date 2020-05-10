@@ -371,7 +371,7 @@ button.download:hover {
 
 .sidebar ul {
   list-style-type: none;
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 100%;
 }
 

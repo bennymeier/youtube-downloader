@@ -146,7 +146,9 @@ class App extends React.Component {
     return (
       <>
         <Toggler onClick={this.changeTheme} />
-        {window.innerWidth > 450 && <Sidebar videos={downloads} />}
+        {window.innerWidth > 450 && downloads.length > 0 && (
+          <Sidebar videos={downloads} />
+        )}
         <main
           className="container"
           style={{
