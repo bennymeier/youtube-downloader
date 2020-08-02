@@ -105,13 +105,17 @@ class App extends React.Component {
     const videoUrl = videoId || input;
     if (!videoUrl) return;
     const { data, success } = await getInfos(videoUrl);
+    console.log("data ", data);
     if (success) {
       const downloadUrl = getDownloadUrl(videoUrl, format);
-      const videoInfo = { title: data.title, videoId: data.video_id };
+      const videoInfo = {
+        title: data.videoDetails.title,
+        videoId: data.videoDetails.videoId,
+      };
       this.setState(
         {
           downloadUrl,
-          currentVideoInfo: data,
+          currentVideoInfo: data.videoDetails,
           downloads: [...this.state.downloads, videoInfo],
         },
         () => {
@@ -146,15 +150,10 @@ class App extends React.Component {
     return (
       <>
         <Toggler onClick={this.changeTheme} />
-        {window.innerWidth > 450 && downloads.length > 0 && (
+        {/* {window.innerWidth > 500 && downloads.length > 0 && (
           <Sidebar videos={downloads} />
-        )}
-        <main
-          className="container"
-          style={{
-            padding: this.shouldSetPadding() ? "1em 250px 1em 1em" : null,
-          }}
-        >
+        )} */}
+        <main className="container">
           <section className="search-section">
             <div className={`input-container ${focus ? "animate" : ""}`}>
               <input
@@ -197,7 +196,7 @@ class App extends React.Component {
               <div>
                 <h2>{currentVideoInfo.title}</h2>
                 <img
-                  src={`https://i.ytimg.com/vi/${currentVideoInfo.video_id}/hqdefault.jpg`}
+                  src={`https://i.ytimg.com/vi/${currentVideoInfo.videoId}/hqdefault.jpg`}
                   alt={currentVideoInfo.title}
                 />
               </div>

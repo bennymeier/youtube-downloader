@@ -62,7 +62,9 @@ app.get("/watch", async (req, res) => {
   }
   try {
     const result = await ytdl.getBasicInfo(url);
-    const { title } = result;
+    const {
+      videoDetails: { title },
+    } = result;
     res.setHeader(
       "Content-disposition",
       contentDisposition(`${title}.${format}`)
