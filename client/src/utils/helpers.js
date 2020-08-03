@@ -1,7 +1,7 @@
 const isLocalHost = window.location.hostname === "localhost";
 export const host = isLocalHost
   ? "http://localhost:4000"
-  : window.location.hostname;
+  : `https://${window.location.hostname}`;
 
 export const getDownloadUrl = (videoId, format = "mp4") =>
   `${host}/watch?v=${videoId}&format=${format}`;
