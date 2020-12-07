@@ -1,40 +1,41 @@
-import React from "react";
-import Button from "./components/Button";
+import React from 'react';
+import Button from './components/Button';
 import {
   getDownloadUrl,
   isYtUrl,
   isDarkMode,
   changeFormatStorage,
-} from "./utils/helpers";
-import { getInfos, getSuggestions } from "./utils/API";
-import Card from "./components/Card";
-import Toggler from "./components/Toggler";
-import Sidebar from "./components/Sidebar";
+} from './utils/helpers';
+import { getInfos, getSuggestions } from './utils/API';
+import Card from './components/Card';
+import Toggler from './components/Toggler';
+
 const formats = [
   {
-    id: "mp4",
-    name: "mp4",
+    id: 'mp4',
+    name: 'mp4',
     isChecked: true,
   },
   {
-    id: "mp3",
-    name: "mp3",
+    id: 'mp3',
+    name: 'mp3',
   },
   {
-    id: "mov",
-    name: "mov",
+    id: 'mov',
+    name: 'mov',
   },
   {
-    id: "flv",
-    name: "flv",
+    id: 'flv',
+    name: 'flv',
   },
 ];
+
 class App extends React.Component {
   state = {
-    input: "",
-    filename: "",
-    downloadUrl: "",
-    format: "mp4",
+    input: '',
+    filename: '',
+    downloadUrl: '',
+    format: 'mp4',
     suggestions: [],
     downloads: [],
     currentVideoInfo: null,
@@ -46,14 +47,14 @@ class App extends React.Component {
 
   writeCss = (isDark) => {
     !isDark
-      ? document.body.classList.remove("dark")
-      : document.body.classList.add("dark");
+      ? document.body.classList.remove('dark')
+      : document.body.classList.add('dark');
   };
 
   changeTheme = () => {
     const isDark = isDarkMode() ? false : true;
     this.setState({ isDark: !isDark });
-    localStorage.setItem("dark", `${isDark}`);
+    localStorage.setItem('dark', `${isDark}`);
     this.writeCss(isDark);
   };
 
@@ -66,7 +67,7 @@ class App extends React.Component {
     const { target } = event;
     const { name, value } = target;
     this.setState({ [name]: value }, () => {
-      if (name === "format") {
+      if (name === 'format') {
         changeFormatStorage(value);
       }
     });
@@ -105,7 +106,7 @@ class App extends React.Component {
     const videoUrl = videoId || input;
     if (!videoUrl) return;
     const { data, success } = await getInfos(videoUrl);
-    console.log("data ", data);
+    console.log('data ', data);
     if (success) {
       const downloadUrl = getDownloadUrl(videoUrl, format);
       const videoInfo = {
@@ -128,6 +129,7 @@ class App extends React.Component {
   };
 
   handleDownloadClick = (videoId) => {
+    console.log(videoId);
     this.download(videoId);
   };
 
@@ -140,22 +142,13 @@ class App extends React.Component {
   };
 
   render() {
-    const {
-      downloadUrl,
-      focus,
-      suggestions,
-      downloads,
-      currentVideoInfo,
-    } = this.state;
+    const { downloadUrl, focus, suggestions, currentVideoInfo } = this.state;
     return (
       <>
         <Toggler onClick={this.changeTheme} />
-        {/* {window.innerWidth > 500 && downloads.length > 0 && (
-          <Sidebar videos={downloads} />
-        )} */}
         <main className="container">
           <section className="search-section">
-            <div className={`input-container ${focus ? "animate" : ""}`}>
+            <div className={`input-container ${focus ? 'animate' : ''}`}>
               <input
                 type="text"
                 name="input"
@@ -227,7 +220,9 @@ class App extends React.Component {
           download
           className="hidden"
           ref={(ref) => (this.hiddenDownloadBtn = ref)}
-        />
+        >
+          {downloadUrl}
+        </a>
       </>
     );
   }
