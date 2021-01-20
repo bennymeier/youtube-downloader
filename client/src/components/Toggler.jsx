@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-export default ({ onClick }) => {
+const Toggler = ({ onClick }) => {
   return (
     <>
       <div
@@ -22,3 +22,5 @@ export default ({ onClick }) => {
     </>
   );
 };
+
+export default Toggler;

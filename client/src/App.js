@@ -96,7 +96,7 @@ class App extends React.Component {
     const { input } = this.state;
     const { data, success } = await getSuggestions(input);
     if (success) {
-      this.setState({ suggestions: data });
+      this.setState({ suggestions: data, currentVideoInfo: undefined });
       console.log(data);
     }
   };
