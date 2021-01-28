@@ -19,6 +19,7 @@ From: ```https://www.youtube.com/watch?v=dvgZkm1xWPE``` to: ```https://www.youtu
 
 ## Coming soon
 - New design with an UI Framework
+- Typed with TypeScript
 - Login into Spotify and select your playlist which you want to download
 - Sidebar with the already downloaded songs
 - Electron desktop app (.exe file downloadable)
