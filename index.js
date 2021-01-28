@@ -16,15 +16,10 @@ const reqOptions = {
   },
 };
 
-// app.use(express.static(__dirname));
 app.use(cors());
 app.use(express.json());
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
-
-// app.get("/", (req, res) => {
-//     res.sendFile(__dirname + "/index.html");
-// });
 
 app.get('/suggestions', async (req, res) => {
   const { search } = req.query;

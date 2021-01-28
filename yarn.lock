@@ -882,10 +882,10 @@ negotiator@0.6.2:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
   integrity sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
 
-nodemon@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-2.0.6.tgz#1abe1937b463aaf62f0d52e2b7eaadf28cc2240d"
-  integrity sha512-4I3YDSKXg6ltYpcnZeHompqac4E6JeAMpGm8tJnB9Y3T0ehasLa4139dJOcCrB93HHrUMsCrKtoAlXTqT5n4AQ==
+nodemon@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/nodemon/-/nodemon-2.0.7.tgz#6f030a0a0ebe3ea1ba2a38f71bf9bab4841ced32"
+  integrity sha512-XHzK69Awgnec9UzHr1kc8EomQh4sjTQ8oRf8TsGrSmHDx9/UmiGG9E/mM3BuTfNeFwdNBvrqQq/RHL0xIeyFOA==
   dependencies:
     chokidar "^3.2.2"
     debug "^3.2.6"
@@ -1359,10 +1359,10 @@ youtube-api-v3-search@^1.2.1:
   dependencies:
     browser-resolve "^1.11.3"
 
-ytdl-core@^4.4.3:
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/ytdl-core/-/ytdl-core-4.4.3.tgz#d968bbb1d6c7f2d0ed477715e849c53ccd3f0d85"
-  integrity sha512-0GexY2dMk0pvIE0UAB5GPiyaNjiawqDi5eUCUHW7CP1ZNyEco8Lct8/3AsI6aO0EQLGK774ocDvWxOE7W0qrTg==
+ytdl-core@^4.4.5:
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/ytdl-core/-/ytdl-core-4.4.5.tgz#761a6792f83e0fd2f2605874ea4c3d51ab717aab"
+  integrity sha512-/ugilIF2PskxNfQgkYZ/esvkp+fiB/mOPdIExW/En+1QTbq5VeTVqgf2hETTen0Co2lHMM4eRxPaczDHTmkb7A==
   dependencies:
     m3u8stream "^0.8.3"
     miniget "^4.0.0"
