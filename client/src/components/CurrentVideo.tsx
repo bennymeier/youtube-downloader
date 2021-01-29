@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PlayPauseButton from './PlayPauseButton';
 
 interface Props {
   title: string;
@@ -19,6 +19,7 @@ interface Props {
   likes: number;
   dislikes: number;
   publishDate: string;
+  downloadURL: string;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -42,16 +43,12 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
-  playIcon: {
-    height: 38,
-    width: 38,
-  },
 }));
 
 const CurrentVideo: React.FC<Props> = (props) => {
   const classes = useStyles();
+  const { title, videoId, downloadURL } = props;
 
-  const { title, videoId } = props;
   if (!title || !videoId) {
     return null;
   }
@@ -69,9 +66,7 @@ const CurrentVideo: React.FC<Props> = (props) => {
             <IconButton aria-label="previous">
               <SkipPreviousIcon />
             </IconButton>
-            <IconButton aria-label="play/pause">
-              <PlayArrowIcon className={classes.playIcon} />
-            </IconButton>
+            <PlayPauseButton downloadURL={downloadURL} />
             <IconButton aria-label="next">
               <SkipNextIcon />
             </IconButton>

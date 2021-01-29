@@ -90,6 +90,7 @@ class App extends React.Component<Props, State> {
         dislikes: data.videoDetails.dislikes,
         publishdate: data.videoDetails.publishDate,
         videoId: data.videoDetails.videoId,
+        downloadURL: this.state.downloadURL,
       };
       this.setState({
         currentVideo: videoInfos,
