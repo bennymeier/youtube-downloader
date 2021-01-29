@@ -7,7 +7,7 @@ import {
   makeStyles,
   IconButton,
   Typography,
-  CardActionArea,
+  Fade,
 } from '@material-ui/core';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
@@ -53,33 +53,38 @@ const CurrentVideo: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   const { title, url, videoId } = props;
+  if (!title || !videoId) {
+    return null;
+  }
   return (
-    <Card className={classes.root} raised>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            {title}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary"></Typography>
-        </CardContent>
-        <div className={classes.controls}>
-          <IconButton aria-label="previous">
-            <SkipPreviousIcon />
-          </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon className={classes.playIcon} />
-          </IconButton>
-          <IconButton aria-label="next">
-            <SkipNextIcon />
-          </IconButton>
+    <Fade in timeout={1000}>
+      <Card className={classes.root} raised>
+        <div className={classes.details}>
+          <CardContent className={classes.content}>
+            <Typography component="h5" variant="h5">
+              {title}
+            </Typography>
+            <Typography variant="subtitle1" color="textSecondary"></Typography>
+          </CardContent>
+          <div className={classes.controls}>
+            <IconButton aria-label="previous">
+              <SkipPreviousIcon />
+            </IconButton>
+            <IconButton aria-label="play/pause">
+              <PlayArrowIcon className={classes.playIcon} />
+            </IconButton>
+            <IconButton aria-label="next">
+              <SkipNextIcon />
+            </IconButton>
+          </div>
         </div>
-      </div>
-      <CardMedia
-        className={classes.cover}
-        image={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
-        title={title}
-      />
-    </Card>
+        <CardMedia
+          className={classes.cover}
+          image={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+          title={title}
+        />
+      </Card>
+    </Fade>
   );
 };
 

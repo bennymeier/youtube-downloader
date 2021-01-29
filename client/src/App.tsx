@@ -122,7 +122,7 @@ class App extends React.Component<Props, State> {
           <Sidebar downloads={downloads} />
           <Main>
             <Container maxWidth="lg" className={classes.container}>
-              {currentVideo && <CurrentVideo {...currentVideo} />}
+              <CurrentVideo {...currentVideo} />
               <SearchContainer handleSearch={this.search} />
               <SuggestionsContainer
                 suggestions={suggestions}

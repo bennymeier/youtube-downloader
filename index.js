@@ -22,12 +22,15 @@ app.use(express.json());
 app.listen(port, () => console.log(`Server is running on port ${port}`));
 
 app.get('/suggestions', async (req, res) => {
-  const { search } = req.query;
+  const { search, results } = req.query;
   const options = {
     q: search,
     part: 'snippet',
     type: 'video',
+    maxResults: results || 5,
+    // regionCode: 'DE',
   };
+
   try {
     const data = await searchYoutube(YOUTUBE_KEY, options);
     const { items } = data;

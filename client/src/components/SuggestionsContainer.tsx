@@ -1,6 +1,6 @@
 import React from 'react';
 import SuggestionCard from './Suggestion';
-import { Grid, Box } from '@material-ui/core';
+import { Grid, Box, Fade } from '@material-ui/core';
 
 interface Suggestion {
   title: string;
@@ -17,19 +17,21 @@ const SuggestionsContainer: React.FC<Props> = (props) => {
   };
 
   return (
-    <Box marginTop="1em">
-      <Grid container spacing={3} justify="center">
-        {suggestions.map((suggestion) => {
-          return (
-            <SuggestionCard
-              key={suggestion.videoId}
-              {...suggestion}
-              onClick={handleDownload}
-            />
-          );
-        })}
-      </Grid>
-    </Box>
+    <Fade in timeout={1000}>
+      <Box marginTop="1em">
+        <Grid container spacing={3} justify="center">
+          {suggestions.map((suggestion) => {
+            return (
+              <SuggestionCard
+                key={suggestion.videoId}
+                {...suggestion}
+                onClick={handleDownload}
+              />
+            );
+          })}
+        </Grid>
+      </Box>
+    </Fade>
   );
 };
 
