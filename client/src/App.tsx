@@ -6,11 +6,14 @@ import {
   withStyles,
   Theme,
   WithStyles,
+  Box,
 } from '@material-ui/core';
 import Main from './components/Main';
 import Sidebar, { Downloads } from './components/Sidebar';
 import SearchContainer from './components/SearchContainer';
 import { getDownloadUrl, isYtUrl } from './utils/helpers';
+import { getInfos } from './utils/API';
+import CurrentVideo from './components/CurrentVideo';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -62,8 +65,20 @@ class App extends React.Component<Props, State> {
 
   fetchSuggestions = () => {};
 
-  getInfos = () => {
-
+  getVideoInfos = async () => {
+    const { searchString } = this.state;
+    const { data, success } = await getInfos(searchString);
+    if (success) {
+      const videoInfos = {
+        title: data.videoDetails.title,
+        url: data.videoDetails.video_url,
+        likes: data.videoDetails.likes,
+        dislikes: data.videoDetails.dislikes,
+        publishdate: data.videoDetails.publishDate,
+        videoId: data.videoDetails.videoId,
+      };
+      this.setState({ currentVideo: videoInfos });
+    }
   };
 
   downloadVideo = () => {
@@ -71,6 +86,7 @@ class App extends React.Component<Props, State> {
     const downloadURL = getDownloadUrl(searchString, format);
     this.setState({ downloadURL }, () => {
       this.hiddenDownloadBtn.current.click();
+      this.getVideoInfos();
     });
   };
 
@@ -78,7 +94,7 @@ class App extends React.Component<Props, State> {
 
   render() {
     const { classes } = this.props;
-    const { downloads, downloadURL } = this.state;
+    const { downloads, downloadURL, currentVideo } = this.state;
 
     return (
       <>
@@ -87,6 +103,7 @@ class App extends React.Component<Props, State> {
           <Sidebar downloads={downloads} />
           <Main>
             <Container maxWidth="lg" className={classes.container}>
+              {currentVideo && <CurrentVideo {...currentVideo} />}
               <SearchContainer handleSearch={this.search} />
             </Container>
           </Main>
