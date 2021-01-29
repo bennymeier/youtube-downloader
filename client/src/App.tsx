@@ -10,7 +10,12 @@ import {
 import Main from './components/Main';
 import Sidebar, { Downloads } from './components/Sidebar';
 import SearchContainer from './components/SearchContainer';
-import { getDownloadUrl, isYtUrl } from './utils/helpers';
+import {
+  getDownloadHistory,
+  getDownloadUrl,
+  isYtUrl,
+  setDownloadHistory,
+} from './utils/helpers';
 import { getInfos, getSuggestions } from './utils/API';
 import CurrentVideo from './components/CurrentVideo';
 import SuggestionsContainer from './components/SuggestionsContainer';
@@ -57,6 +62,13 @@ class App extends React.Component<Props, State> {
     suggestions: [],
   };
 
+  componentDidMount = () => {
+    const downloadHistory = getDownloadHistory();
+    if (downloadHistory) {
+      this.setState({ downloads: downloadHistory });
+    }
+  };
+
   search = (searchString: string, format: Format) => {
     const isYTUrl = isYtUrl(searchString);
     this.setState({ searchString, format }, () => {
@@ -92,10 +104,16 @@ class App extends React.Component<Props, State> {
         videoId: data.videoDetails.videoId,
         downloadURL: this.state.downloadURL,
       };
-      this.setState({
-        currentVideo: videoInfos,
-        downloads: [videoInfos, ...this.state.downloads],
-      });
+      const downloads = [videoInfos, ...this.state.downloads];
+      this.setState(
+        {
+          currentVideo: videoInfos,
+          downloads,
+        },
+        () => {
+          setDownloadHistory(videoInfos);
+        }
+      );
     }
   };
 

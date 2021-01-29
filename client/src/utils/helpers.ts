@@ -30,3 +30,17 @@ export const changeFormatStorage = (format: string) => {
 export const isDarkMode = () => {
   return localStorage.getItem('dark') === 'true' ? true : false;
 };
+
+export const getDownloadHistory = () => {
+  const history = JSON.parse(localStorage.getItem('download_history'));
+  if (history) {
+    return history;
+  } else {
+    return [];
+  }
+};
+
+export const setDownloadHistory = (download: any) => {
+  const history = [download, ...getDownloadHistory()];
+  localStorage.setItem('download_history', JSON.stringify(history));
+};
