@@ -11,8 +11,6 @@ import {
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import ThumbUpIcon from '@material-ui/icons/ThumbUpAlt';
-import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
 interface Props {
   title: string;
@@ -52,39 +50,40 @@ const useStyles = makeStyles((theme) => ({
 const CurrentVideo: React.FC<Props> = (props) => {
   const classes = useStyles();
 
-  const { title, url, videoId, dislikes, likes, publishDate } = props;
+  const { title, url, videoId } = props;
   return (
     <Box paddingBottom="1em">
-      <Card className={classes.root}>
-        <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <Typography component="h5" variant="h5">
-              {title}
-            </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              {/* <Box alignItems="center" display="flex">
-                <ThumbUpIcon /> {likes} <ThumbDownIcon /> {dislikes}
-              </Box> */}
-            </Typography>
-          </CardContent>
-          <div className={classes.controls}>
-            <IconButton aria-label="previous">
-              <SkipPreviousIcon />
-            </IconButton>
-            <IconButton aria-label="play/pause">
-              <PlayArrowIcon className={classes.playIcon} />
-            </IconButton>
-            <IconButton aria-label="next">
-              <SkipNextIcon />
-            </IconButton>
+      <a href={url} target="_blank" rel="noreferrer">
+        <Card className={classes.root}>
+          <div className={classes.details}>
+            <CardContent className={classes.content}>
+              <Typography component="h5" variant="h5">
+                {title}
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                color="textSecondary"
+              ></Typography>
+            </CardContent>
+            <div className={classes.controls}>
+              <IconButton aria-label="previous">
+                <SkipPreviousIcon />
+              </IconButton>
+              <IconButton aria-label="play/pause">
+                <PlayArrowIcon className={classes.playIcon} />
+              </IconButton>
+              <IconButton aria-label="next">
+                <SkipNextIcon />
+              </IconButton>
+            </div>
           </div>
-        </div>
-        <CardMedia
-          className={classes.cover}
-          image={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
-          title={title}
-        />
-      </Card>
+          <CardMedia
+            className={classes.cover}
+            image={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+            title={title}
+          />
+        </Card>
+      </a>
     </Box>
   );
 };

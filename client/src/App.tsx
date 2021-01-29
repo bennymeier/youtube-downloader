@@ -6,7 +6,6 @@ import {
   withStyles,
   Theme,
   WithStyles,
-  Box,
 } from '@material-ui/core';
 import Main from './components/Main';
 import Sidebar, { Downloads } from './components/Sidebar';
@@ -77,7 +76,10 @@ class App extends React.Component<Props, State> {
         publishdate: data.videoDetails.publishDate,
         videoId: data.videoDetails.videoId,
       };
-      this.setState({ currentVideo: videoInfos });
+      this.setState({
+        currentVideo: videoInfos,
+        downloads: [videoInfos, ...this.state.downloads],
+      });
     }
   };
 
