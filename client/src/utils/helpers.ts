@@ -27,6 +27,8 @@ export const changeFormatStorage = (format: string) => {
   localStorage.setItem('format', format);
 };
 
+export const getFormat = () => localStorage.getItem('format');
+
 export const isDarkMode = () => {
   return localStorage.getItem('dark') === 'true' ? true : false;
 };

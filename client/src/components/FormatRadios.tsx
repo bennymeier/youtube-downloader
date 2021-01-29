@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
+import { changeFormatStorage, getFormat } from '../utils/helpers';
 
 const formats = ['mp4', 'mp3', 'wav', 'flv'];
 interface Props {
@@ -12,8 +13,16 @@ const FormatRadios: React.FC<Props> = (props) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormat(event.target.value);
+    changeFormatStorage(event.target.value);
     onChange(format);
   };
+
+  useEffect(() => {
+    const formatStorage = getFormat();
+    if (formatStorage) {
+      setFormat(formatStorage);
+    }
+  }, []);
 
   return (
     <>

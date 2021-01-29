@@ -13,6 +13,7 @@ import SearchContainer from './components/SearchContainer';
 import {
   getDownloadHistory,
   getDownloadUrl,
+  getFormat,
   isYtUrl,
   setDownloadHistory,
 } from './utils/helpers';
@@ -66,6 +67,10 @@ class App extends React.Component<Props, State> {
     const downloadHistory = getDownloadHistory();
     if (downloadHistory) {
       this.setState({ downloads: downloadHistory });
+    }
+    const format = getFormat() as Format;
+    if (format) {
+      this.setState({ format });
     }
   };
 
