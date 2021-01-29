@@ -17,9 +17,11 @@ const FormatsMenu: React.FC<Props> = (props) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (format: string) => {
+  const handleClose = (backdrop = true, format = 'mp4') => {
     setAnchorEl(null);
-    onClick(format);
+    if (!backdrop) {
+      onClick(format);
+    }
   };
 
   return (
@@ -49,7 +51,7 @@ const FormatsMenu: React.FC<Props> = (props) => {
           <MenuItem
             key={option}
             selected={option === 'Pyxis'}
-            onClick={() => handleClose(option)}
+            onClick={() => handleClose(false, option)}
           >
             {option}
           </MenuItem>
