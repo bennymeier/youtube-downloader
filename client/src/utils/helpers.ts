@@ -3,14 +3,14 @@ export const host = isLocalHost
   ? 'http://localhost:4000'
   : `https://${window.location.hostname}`;
 
-export const getDownloadUrl = (videoId, format = 'mp4') =>
+export const getDownloadUrl = (videoId: string, format = 'mp4') =>
   `${host}/watch?v=${videoId}&format=${format}`;
 
-export const secondsToMinutes = (time) => {
+export const secondsToMinutes = (time: number) => {
   return Math.floor(time / 60) + ':' + Math.floor(time % 60);
 };
 
-export const isYtUrl = (url) => {
+export const isYtUrl = (url: string) => {
   const ytRegex = new RegExp(
     /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(\?\S*)?$/
   );
@@ -23,7 +23,7 @@ export const getRandomEmoji = () => {
   return emojis[nr];
 };
 
-export const changeFormatStorage = (format) => {
+export const changeFormatStorage = (format: string) => {
   localStorage.setItem('format', format);
 };
 

@@ -9,16 +9,21 @@ interface Props {
 interface State {
   play: boolean;
   audio: HTMLAudioElement;
+  downloadURL: string;
 }
 class PlayPauseButton extends React.Component<Props, State> {
   state: State = {
     play: false,
     audio: null,
+    downloadURL: '',
   };
 
   componentDidMount() {
     this.setState(
-      { play: false, audio: new Audio(this.props.downloadURL) },
+      {
+        audio: new Audio(this.props.downloadURL),
+        downloadURL: this.props.downloadURL,
+      },
       () => {
         this.state.audio.addEventListener('ended', () => {
           this.setState({ play: false });
@@ -28,6 +33,8 @@ class PlayPauseButton extends React.Component<Props, State> {
   }
 
   componentWillUnmount() {
+    this.state.audio.load();
+    this.setState({ audio: null });
     this.state.audio.removeEventListener('ended', () =>
       this.setState({ play: false })
     );
@@ -57,6 +64,7 @@ class PlayPauseButton extends React.Component<Props, State> {
 
   render() {
     const { play } = this.state;
+    
     return (
       <>
         <IconButton aria-label="play/pause" onClick={this.handleClick}>

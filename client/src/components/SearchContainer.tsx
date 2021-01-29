@@ -29,6 +29,7 @@ const SearchContainer: React.FC<Props> = (props) => {
     <>
       <Box display="flex">
         <Input
+          autoFocus
           placeholder="Directlink or search for suggestions..."
           onChange={(event) => setInput(event.target.value)}
           fullWidth
