@@ -1,13 +1,13 @@
-const isLocalHost = window.location.hostname === "localhost";
+const isLocalHost = window.location.hostname === 'localhost';
 export const host = isLocalHost
-  ? "http://localhost:4000"
+  ? 'http://localhost:4000'
   : `https://${window.location.hostname}`;
 
-export const getDownloadUrl = (videoId, format = "mp4") =>
+export const getDownloadUrl = (videoId, format = 'mp4') =>
   `${host}/watch?v=${videoId}&format=${format}`;
 
 export const secondsToMinutes = (time) => {
-  return Math.floor(time / 60) + ":" + Math.floor(time % 60);
+  return Math.floor(time / 60) + ':' + Math.floor(time % 60);
 };
 
 export const isYtUrl = (url) => {
@@ -18,15 +18,15 @@ export const isYtUrl = (url) => {
 };
 
 export const getRandomEmoji = () => {
-  const emojis = ["🎵", "🎼", "🎶", "🎻", "🎹", "🎺", "🎧", "🎤", "🎤"];
+  const emojis = ['🎵', '🎼', '🎶', '🎻', '🎹', '🎺', '🎧', '🎤', '🎤'];
   const nr = Math.floor(Math.random() * (emojis.length - 1)) + 0;
   return emojis[nr];
 };
 
 export const changeFormatStorage = (format) => {
-  localStorage.setItem("format", format);
+  localStorage.setItem('format', format);
 };
 
 export const isDarkMode = () => {
-  return localStorage.getItem("dark") === "true" ? true : false;
+  return localStorage.getItem('dark') === 'true' ? true : false;
 };
