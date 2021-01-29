@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Card,
-  Box,
   CardContent,
   CardMedia,
   makeStyles,
@@ -52,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 const CurrentVideo: React.FC<Props> = (props) => {
   const classes = useStyles();
 
-  const { title, url, videoId } = props;
+  const { title, videoId } = props;
   if (!title || !videoId) {
     return null;
   }
