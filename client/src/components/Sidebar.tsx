@@ -55,8 +55,8 @@ const Sidebar: React.FC<Props> = (props) => {
         {downloads.map((download, index) => {
           const { title, url, videoId } = download;
           return (
-            <>
-              <List key={videoId}>
+            <Box key={videoId}>
+              <List>
                 <Box display="flex" alignItems="center" margin="0.2em">
                   <Box marginRight="0.2em">
                     <a href={url} target="_blank" rel="noreferrer">
@@ -72,7 +72,7 @@ const Sidebar: React.FC<Props> = (props) => {
                 </Box>
               </List>
               {index >= 0 && <Divider />}
-            </>
+            </Box>
           );
         })}
       </Drawer>

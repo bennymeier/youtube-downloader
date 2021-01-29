@@ -11,8 +11,9 @@ import Main from './components/Main';
 import Sidebar, { Downloads } from './components/Sidebar';
 import SearchContainer from './components/SearchContainer';
 import { getDownloadUrl, isYtUrl } from './utils/helpers';
-import { getInfos } from './utils/API';
+import { getInfos, getSuggestions } from './utils/API';
 import CurrentVideo from './components/CurrentVideo';
+import SuggestionsContainer from './components/SuggestionsContainer';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -32,12 +33,18 @@ const styles = (theme: Theme) =>
 
 type Props = WithStyles<typeof styles>;
 type Format = 'mp4' | 'mp3' | 'mov' | 'flv';
+interface Suggestion {
+  title: string;
+  url: string;
+  videoId: string;
+}
 interface State {
   downloads: Downloads[];
   searchString: string;
   downloadURL: string;
   currentVideo: any;
   format: Format;
+  suggestions: Suggestion[];
 }
 class App extends React.Component<Props, State> {
   private hiddenDownloadBtn = React.createRef<HTMLAnchorElement>();
@@ -47,22 +54,30 @@ class App extends React.Component<Props, State> {
     downloadURL: '',
     currentVideo: null,
     format: 'mp4',
+    suggestions: [],
   };
 
   search = (searchString: string, format: Format) => {
     const isYTUrl = isYtUrl(searchString);
     this.setState({ searchString, format }, () => {
       if (isYTUrl) {
-        console.log('DOWNLOAD');
         this.downloadVideo();
       } else {
-        console.log('FETCH SUGGESTIONS');
         this.fetchSuggestions();
       }
     });
   };
 
-  fetchSuggestions = () => {};
+  fetchSuggestions = async () => {
+    const { searchString } = this.state;
+    const { data, success } = await getSuggestions(searchString);
+    if (success) {
+      const videoInfos = data.map((video) => {
+        return { videoId: video.id.videoId, title: video.snippet.title };
+      });
+      this.setState({ suggestions: videoInfos });
+    }
+  };
 
   getVideoInfos = async () => {
     const { searchString } = this.state;
@@ -92,11 +107,13 @@ class App extends React.Component<Props, State> {
     });
   };
 
-  clickHiddenDownloadBtn = () => {};
+  downloadSuggestion = (url: string, format: Format) => {
+    this.setState({ searchString: url, format }, () => this.downloadVideo());
+  };
 
   render() {
     const { classes } = this.props;
-    const { downloads, downloadURL, currentVideo } = this.state;
+    const { downloads, downloadURL, currentVideo, suggestions } = this.state;
 
     return (
       <>
@@ -107,6 +124,10 @@ class App extends React.Component<Props, State> {
             <Container maxWidth="lg" className={classes.container}>
               {currentVideo && <CurrentVideo {...currentVideo} />}
               <SearchContainer handleSearch={this.search} />
+              <SuggestionsContainer
+                suggestions={suggestions}
+                onClick={this.downloadSuggestion}
+              />
             </Container>
           </Main>
         </div>
