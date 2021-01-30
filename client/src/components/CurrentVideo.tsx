@@ -10,17 +10,8 @@ import {
 } from '@material-ui/core';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import PlayPauseButton from './PlayPauseButton';
-
-interface Props {
-  title: string;
-  url: string;
-  videoId: string;
-  likes: number;
-  dislikes: number;
-  publishDate: string;
-  downloadURL: string;
-}
+import PlayPauseButton from './Player/PlayPauseButton';
+import { Video } from '../Typings';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CurrentVideo: React.FC<Props> = (props) => {
+const CurrentVideo: React.FC<Video> = (props) => {
   const classes = useStyles();
   const { title, videoId, downloadURL } = props;
 

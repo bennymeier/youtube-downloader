@@ -6,7 +6,7 @@ import {
   List,
   Typography,
 } from '@material-ui/core';
-import { getSuggestions } from '../utils/API';
+import { getSuggestions } from '../../utils/API';
 
 const YouTubeTrends = () => {
   const [loading, setLoading] = useState(true);

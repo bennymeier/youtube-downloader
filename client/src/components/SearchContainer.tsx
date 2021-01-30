@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IconButton, Input, Box } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import FormatRadios from './FormatRadios';
+import FormatRadios from './Formats/FormatRadios';
 
 interface Props {
   handleSearch: (searchString: string, format: string) => void;

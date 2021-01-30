@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FormControlLabel, Radio, RadioGroup } from '@material-ui/core';
-import { changeFormatStorage, getFormat } from '../utils/helpers';
+import { changeFormatStorage, getFormat } from '../../utils/helpers';
 
 const formats = ['mp4', 'mp3', 'wav', 'flv'];
 interface Props {

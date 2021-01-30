@@ -1,11 +1,8 @@
 import React from 'react';
 import SuggestionCard from './Suggestion';
 import { Grid, Box, Fade } from '@material-ui/core';
+import { Suggestion } from '../../Typings';
 
-interface Suggestion {
-  title: string;
-  videoId: string;
-}
 interface Props {
   suggestions: Suggestion[];
   onClick: (url: string, format: string) => void;

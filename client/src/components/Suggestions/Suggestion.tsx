@@ -9,11 +9,10 @@ import {
   Typography,
   CardActions,
 } from '@material-ui/core';
-import FormatsMenu from './FormatsMenu';
+import FormatsMenu from '../Formats/FormatsMenu';
+import { Suggestion as SuggestionType } from '../../Typings';
 
-interface Props {
-  title: string;
-  videoId: string;
+interface Props extends SuggestionType {
   onClick: (url: string, format: string) => void;
 }
 const useStyles = makeStyles({

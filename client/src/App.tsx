@@ -8,7 +8,7 @@ import {
   WithStyles,
 } from '@material-ui/core';
 import Main from './components/Main';
-import Sidebar, { Downloads } from './components/Sidebar';
+import Sidebar from './components/Sidebar/Sidebar';
 import SearchContainer from './components/SearchContainer';
 import {
   getDownloadHistory,
@@ -19,7 +19,9 @@ import {
 } from './utils/helpers';
 import { getInfos, getSuggestions } from './utils/API';
 import CurrentVideo from './components/CurrentVideo';
-import SuggestionsContainer from './components/SuggestionsContainer';
+import SuggestionsContainer from './components/Suggestions/SuggestionsContainer';
+import SpotifyLogin from './components/Spotify/SpotifyLogin';
+import { Download, Formats, Suggestion } from './Typings';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -38,18 +40,12 @@ const styles = (theme: Theme) =>
   });
 
 type Props = WithStyles<typeof styles>;
-type Format = 'mp4' | 'mp3' | 'mov' | 'flv';
-interface Suggestion {
-  title: string;
-  url: string;
-  videoId: string;
-}
 interface State {
-  downloads: Downloads[];
+  downloads: Download[];
   searchString: string;
   downloadURL: string;
   currentVideo: any;
-  format: Format;
+  format: Formats;
   suggestions: Suggestion[];
 }
 class App extends React.Component<Props, State> {
@@ -68,13 +64,13 @@ class App extends React.Component<Props, State> {
     if (downloadHistory) {
       this.setState({ downloads: downloadHistory });
     }
-    const format = getFormat() as Format;
+    const format = getFormat() as Formats;
     if (format) {
       this.setState({ format });
     }
   };
 
-  search = (searchString: string, format: Format) => {
+  search = (searchString: string, format: Formats) => {
     const isYTUrl = isYtUrl(searchString);
     this.setState({ searchString, format }, () => {
       if (isYTUrl) {
@@ -131,7 +127,7 @@ class App extends React.Component<Props, State> {
     });
   };
 
-  downloadSuggestion = (url: string, format: Format) => {
+  downloadSuggestion = (url: string, format: Formats) => {
     this.setState({ searchString: url, format }, () => this.downloadVideo());
   };
 
@@ -147,6 +143,7 @@ class App extends React.Component<Props, State> {
           <Main>
             <Container maxWidth="lg" className={classes.container}>
               <CurrentVideo {...currentVideo} />
+              <SpotifyLogin />
               <SearchContainer handleSearch={this.search} />
               <SuggestionsContainer
                 suggestions={suggestions}
