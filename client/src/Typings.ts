@@ -1,5 +1,3 @@
-import Suggestion from './components/Suggestions/Suggestion';
-
 export type Formats = 'mp4' | 'mp3' | 'mov' | 'flv';
 
 export interface Suggestion {
