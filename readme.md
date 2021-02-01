@@ -17,14 +17,18 @@ Direct download while not leaving YouTube: paste **dl** between youtub**dl**e.co
 ### Example
 From: ```https://www.youtube.com/watch?v=dvgZkm1xWPE``` to: ```https://www.youtubdle.com/watch?v=dvgZkm1xWPE```
 
-## Coming soon
+## Coming soon (See Preview down below)
 - New design with an UI Framework
 - Login into Spotify and select your playlist which you want to download
 - Sidebar with the already downloaded songs
 - Electron desktop app (.exe file downloadable)
 
+## V1
 ![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/screenshot.PNG)
 ![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/screenshot_1.PNG)
+
+## V2 Coming soon
+![](https://raw.githubusercontent.com/bennymeier/youtube-downloader/v2/screenshot_v2.PNG)
 
 ## Available Scripts
 
