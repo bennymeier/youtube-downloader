@@ -21,7 +21,7 @@ import { getInfos, getSuggestions } from './utils/API';
 import CurrentVideo from './components/CurrentVideo';
 import SuggestionsContainer from './components/Suggestions/SuggestionsContainer';
 import SpotifyLogin from './components/Spotify/SpotifyLogin';
-import { Download, Formats, Suggestion } from './Typings';
+import { Download, Formats, Suggestion, Video } from './Typings';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -44,7 +44,7 @@ interface State {
   downloads: Download[];
   searchString: string;
   downloadURL: string;
-  currentVideo: any;
+  currentVideo: Video;
   format: Formats;
   suggestions: Suggestion[];
 }
@@ -101,7 +101,7 @@ class App extends React.Component<Props, State> {
         url: data.videoDetails.video_url,
         likes: data.videoDetails.likes,
         dislikes: data.videoDetails.dislikes,
-        publishdate: data.videoDetails.publishDate,
+        publishDate: data.videoDetails.publishDate,
         videoId: data.videoDetails.videoId,
         downloadURL: this.state.downloadURL,
       };
