@@ -102,7 +102,9 @@ export default function Main() {
       <Container maxW="container.md">
         <Box textAlign="center" fontSize="xl">
           <Box mt="5" mb="5">
-            <Heading>YouTube Downloader</Heading>
+            <Heading className="special-elite-font" size="2xl">
+              YouTube Downloader
+            </Heading>
             <Text>
               Convert and download Youtube videos in MP4, MP3, MOV and FLV for
               free

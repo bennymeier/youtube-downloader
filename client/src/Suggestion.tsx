@@ -52,6 +52,7 @@ export default function Suggestion(props: Props) {
               as="h4"
               lineHeight="tight"
               isTruncated
+              title={snippet.title}
             >
               {snippet.title}
             </Box>

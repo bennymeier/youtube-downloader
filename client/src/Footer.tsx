@@ -119,7 +119,10 @@ export default function Footer() {
           >
             <Stack spacing={6} align="flex-start">
               <Box>
-                <Heading color={useColorModeValue('gray.700', 'white')}>
+                <Heading
+                  className="special-elite-font"
+                  color={useColorModeValue('gray.700', 'white')}
+                >
                   YouTubdle
                 </Heading>
               </Box>

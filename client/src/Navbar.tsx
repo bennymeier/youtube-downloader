@@ -41,15 +41,16 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           /> */}
           <HStack spacing={8} alignItems={'center'}>
-            <Heading size="md">
+            <Heading size="lg" className="special-elite-font">
               <Link
                 href={`${
                   isLocalHost
                     ? 'http://localhost:3000'
                     : 'https://youtubdle.com'
                 }`}
+                _hover={{ textDecoration: 'none', color: 'gray.500' }}
               >
-                YouTubdle
+                YouTubdle.com
               </Link>
             </Heading>
             {/* <HStack

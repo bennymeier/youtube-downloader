@@ -12,9 +12,11 @@ export default function Suggestions(props: Props) {
 
   return (
     <Box>
-      <Box mt="5">
-        <Heading textAlign="center">Suggestions</Heading>
-      </Box>
+      {!!data.length && (
+        <Box mt="5">
+          <Heading textAlign="center">Suggestions</Heading>
+        </Box>
+      )}
       {isLoading && <SuggestionsSkeleton />}
       {!isLoading && (
         <SimpleGrid
