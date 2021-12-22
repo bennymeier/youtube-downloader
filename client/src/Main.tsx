@@ -4,11 +4,9 @@ import {
   Text,
   Heading,
   VisuallyHidden,
-  Stack,
-  Skeleton,
 } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
-import ConvertBox from './ConvertBox';
+import PreviewBox from './PreviewBox';
 import Search from './Search';
 import Suggestions from './Suggestions';
 import {
@@ -22,7 +20,8 @@ import { getDownloadUrl, isYtUrl } from './utils/helpers';
 export default function Main() {
   const [downloadUrl, setDownloadUrl] = useState('');
   const [input, setInput] = useState('');
-  const [isLoading, setLoading] = useState(false);
+  const [isConvertionLoading, setConvertionLoading] = useState(false);
+  const [isSearchLoading, setSearchLoading] = useState(false);
   const [currentVideo, setCurrentVideo] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState(false);
@@ -31,6 +30,8 @@ export default function Main() {
     setInput(event.target.value);
   };
   const fetchSuggestions = async () => {
+    setError(false);
+    setSearchLoading(true);
     try {
       const { data } = await getSuggestions(input);
       setSuggestions(data.data);
@@ -44,6 +45,7 @@ export default function Main() {
           searchInput: input,
         });
       });
+      setSearchLoading(false);
     } catch (err) {
       setError(true);
       console.warn(err);
@@ -53,11 +55,11 @@ export default function Main() {
     const isYouTubeUrl = isYtUrl(input);
     if (!input) {
       setError(true);
-    } else if (isYouTubeUrl) {
-      setLoading(true);
-      setError(false);
+      return;
     }
     if (isYouTubeUrl) {
+      setError(false);
+      setConvertionLoading(true);
       try {
         const { data } = await getInfos(input);
         const {
@@ -73,10 +75,10 @@ export default function Main() {
           authorId: videoDetails.author.user,
         });
         setCurrentVideo(videoDetails);
-        setLoading(false);
+        setConvertionLoading(false);
       } catch (err) {
         setError(true);
-        setLoading(false);
+        setConvertionLoading(false);
       }
     } else {
       fetchSuggestions();
@@ -88,7 +90,7 @@ export default function Main() {
       const downloadUrl = getDownloadUrl(videoId, format);
       setDownloadUrl(downloadUrl);
       if (downloadBtnRef?.current) {
-        setLoading(false);
+        setConvertionLoading(false);
         downloadBtnRef.current.click();
       }
     } catch (err) {
@@ -112,19 +114,17 @@ export default function Main() {
             error={error}
             input={input}
           />
-          {currentVideo && !isLoading && (
-            <ConvertBox data={currentVideo} chooseFormat={chooseFormat} />
-          )}
-          {isLoading && (
-            <Stack mb="5" mt="5">
-              <Skeleton height="28px" />
-              <Skeleton height="28px" />
-              <Skeleton height="28px" />
-              <Skeleton height="28px" />
-            </Stack>
-          )}
+          <PreviewBox
+            data={currentVideo}
+            chooseFormat={chooseFormat}
+            isLoading={isConvertionLoading}
+          />
         </Box>
-        <Suggestions data={suggestions} chooseFormat={chooseFormat} />
+        <Suggestions
+          data={suggestions}
+          chooseFormat={chooseFormat}
+          isLoading={isSearchLoading}
+        />
       </Container>
       <VisuallyHidden>
         <a href={downloadUrl} download ref={downloadBtnRef}>

@@ -20,6 +20,7 @@ interface Props {
 }
 export default function ConvertBox(props: Props) {
   const { data, chooseFormat } = props;
+
   return (
     <Box
       transition="all .2s ease-in-out"

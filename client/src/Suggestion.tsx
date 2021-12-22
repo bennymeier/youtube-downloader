@@ -29,7 +29,7 @@ export default function Suggestion(props: Props) {
     data: { snippet, id },
   } = props;
   return (
-    <Flex p={50} alignItems="center" justifyContent="center">
+    <Flex alignItems="center" justifyContent="center">
       <Box
         bg={useColorModeValue('white', 'gray.800')}
         maxW="xs"
