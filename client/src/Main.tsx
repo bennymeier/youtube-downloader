@@ -10,12 +10,7 @@ import Features from './Features';
 import PreviewBox from './PreviewBox';
 import Search from './Search';
 import Suggestions from './Suggestions';
-import {
-  createDownloadStatistic,
-  createSearchStatistic,
-  getInfos,
-  getSuggestions,
-} from './utils/API';
+import { getInfos, getSuggestions } from './utils/API';
 import { getDownloadUrl, isYtUrl } from './utils/helpers';
 
 export default function Main() {
@@ -36,16 +31,6 @@ export default function Main() {
     try {
       const { data } = await getSuggestions(input);
       setSuggestions(data.data);
-      data.data.forEach((videoInfo: any) => {
-        createSearchStatistic({
-          videoId: videoInfo.id.videoId,
-          channelId: videoInfo.snippet.channelId,
-          channelTitle: videoInfo.snippet.channelTitle,
-          publishedAt: videoInfo.snippet.publishedAt,
-          title: videoInfo.title,
-          searchInput: input,
-        });
-      });
       setSearchLoading(false);
     } catch (err) {
       setError(true);
@@ -78,22 +63,10 @@ export default function Main() {
   };
   const chooseFormat = async (format: string, videoId: string) => {
     try {
-      const { data } = await getInfos(videoId);
-      const {
-        data: { videoDetails },
-      } = data;
+      await getInfos(videoId);
       const downloadUrl = getDownloadUrl(videoId, format);
       setDownloadUrl(downloadUrl);
       if (downloadBtnRef?.current) {
-        const { videoId, title, uploadDate, likes, category } = videoDetails;
-        createDownloadStatistic({
-          videoId,
-          title,
-          uploadDate,
-          likes,
-          category,
-          authorId: videoDetails.author.user,
-        });
         setConvertionLoading(false);
         downloadBtnRef.current.click();
       }

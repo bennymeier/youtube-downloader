@@ -32,6 +32,7 @@ app.get('/suggestions', async (req, res) => {
     part: 'snippet',
     type: 'video',
   };
+  db.collection('searchstatistics').insertOne({ searchInput: search });
   try {
     const data = await searchYoutube(YOUTUBE_KEY, options);
     const { items } = data;
@@ -72,8 +73,18 @@ app.get('/watch', async (req, res) => {
   try {
     const result = await ytdl.getBasicInfo(url, reqOptions);
     const {
-      videoDetails: { title },
+      videoDetails: { title, videoId, uploadDate, likes, category, author },
     } = result;
+    const videoInfo = {
+      title,
+      videoId,
+      uploadDate,
+      likes,
+      category,
+      authorId: author.id,
+      downloadedFormat: format,
+    };
+    db.collection('downloadstatistics').insertOne(videoInfo);
     res.setHeader(
       'Content-disposition',
       contentDisposition(`${title}.${format}`)

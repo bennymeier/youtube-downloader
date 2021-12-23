@@ -9,6 +9,7 @@ const DownloadStatistic = new Schema(
     likes: { type: Number },
     category: { type: String },
     authorId: { type: String },
+    downloadedFormat: { type: String },
   },
   { timestamps: true }
 );
