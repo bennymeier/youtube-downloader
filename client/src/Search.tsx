@@ -6,9 +6,10 @@ interface Props {
   handleSearch: () => void;
   error: boolean;
   input: string;
+  isLoading: boolean;
 }
 const Search = (props: Props) => {
-  const { handleChange, handleSearch, error, input } = props;
+  const { handleChange, handleSearch, error, input, isLoading } = props;
 
   const handleKeydown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13 || event.key === 'Enter') {
@@ -25,7 +26,13 @@ const Search = (props: Props) => {
           value={input}
           onKeyDown={handleKeydown}
         />
-        <Button onClick={handleSearch}>Convert</Button>
+        <Button
+          onClick={handleSearch}
+          isLoading={isLoading}
+          loadingText="Converting..."
+        >
+          Convert
+        </Button>
       </Flex>
     </Box>
   );

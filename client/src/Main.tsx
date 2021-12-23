@@ -92,6 +92,10 @@ export default function Main() {
             handleSearch={handleSearch}
             error={error}
             input={input}
+            isLoading={
+              (isConvertionLoading && !isSearchLoading) ||
+              (!isConvertionLoading && isSearchLoading)
+            }
           />
           <PreviewBox
             data={currentVideo}
