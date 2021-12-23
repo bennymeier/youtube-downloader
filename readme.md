@@ -27,13 +27,13 @@ From: `https://www.youtube.com/watch?v=dvgZkm1xWPE` to: `https://www.youtubdle.c
 
 ## Screenshots
 
-![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/download_preview.png)
-![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/suggestions.png)
-![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/download_preview_dark.png)
-![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/suggestions_dark.png)
-![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/download_preview_loading.png)
-![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/suggestions_loading.png)
-![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/changelog.png)
+![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/.github/download_preview.png)
+![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/.github/suggestions.png)
+![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/.github/download_preview_dark.png)
+![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/.github/suggestions_dark.png)
+![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/.github/download_preview_loading.png)
+![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/.github/suggestions_loading.png)
+![](https://raw.githubusercontent.com/bennymeier/new-youtube-downloader/master/.github/changelog.png)
 
 ## Stack
 
