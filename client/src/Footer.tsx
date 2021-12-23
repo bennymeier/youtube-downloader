@@ -207,6 +207,12 @@ export default function Footer() {
             </Heading>
             <UnorderedList>
               <ListItem>Added Imprint</ListItem>
+              <ListItem>Added loading state to button</ListItem>
+              <ListItem>Added skeletons for suggestions</ListItem>
+              <ListItem>Added skeleton for download preview</ListItem>
+              <ListItem>Added features as hero section</ListItem>
+              <ListItem>Styled some headings with new font-family</ListItem>
+              <ListItem>Fixed some bugs</ListItem>
             </UnorderedList>
             <Heading size="sm">
               {new Date('2021-12-21').toLocaleDateString()}
@@ -239,14 +245,10 @@ export default function Footer() {
               Benny Meier Media
             </Heading>
             <Text>Benjamin Meier</Text>
-            <Text>
-              Schmalgasse 2a, <br />
-              79258 Hartheim
-            </Text>
             <Flex alignItems="center" gridGap={2}>
               <EmailIcon />{' '}
               <Link href="mailto:hi@bennymeier-media.de">
-                bennymeier-media.de
+                hi@bennymeier-media.de
               </Link>
             </Flex>
           </ModalBody>
