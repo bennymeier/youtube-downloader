@@ -6,12 +6,12 @@ Just paste a link or search to download your video. The available formats are mp
 
 ## Features
 
-- Built in search
+- Built in search 🔍
 - 4 formats 🤘
 - Fast in grabbing information and downloading 🚀
-- Suggestions
+- Suggestions 🦾
 - Responsive and built with [Chakra-UI](https://chakra-ui.com/) Framework 😎
-- Also usable on iOS & Android
+- Also usable on iOS & Android 📱
 
 ## Coming Soon
 
