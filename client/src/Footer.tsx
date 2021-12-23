@@ -212,6 +212,9 @@ export default function Footer() {
               <ListItem>Added skeleton for download preview</ListItem>
               <ListItem>Added features as hero section</ListItem>
               <ListItem>Styled some headings with new font-family</ListItem>
+              <ListItem>
+                Changed RegEx to find direct YouTube URLs for direct download
+              </ListItem>
               <ListItem>Fixed some bugs</ListItem>
             </UnorderedList>
             <Heading size="sm">
