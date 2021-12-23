@@ -32,7 +32,7 @@ app.get('/suggestions', async (req, res) => {
     part: 'snippet',
     type: 'video',
   };
-  db.collection('searchStatistics').insertOne({ searchInput: search });
+  db.collection('searchstatistics').insertOne({ searchInput: search });
   try {
     const data = await searchYoutube(YOUTUBE_KEY, options);
     const { items } = data;
@@ -84,7 +84,7 @@ app.get('/watch', async (req, res) => {
       authorId: author.id,
       downloadedFormat: format,
     };
-    db.collection('downloadStatistics').insertOne(videoInfo);
+    db.collection('downloadstatistics').insertOne(videoInfo);
     res.setHeader(
       'Content-disposition',
       contentDisposition(`${title}.${format}`)

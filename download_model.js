@@ -14,4 +14,4 @@ const DownloadStatistic = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('downloadStatistics', DownloadStatistic);
+module.exports = mongoose.model('downloadstatistics', DownloadStatistic);
