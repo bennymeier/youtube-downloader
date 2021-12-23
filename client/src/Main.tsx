@@ -6,6 +6,7 @@ import {
   VisuallyHidden,
 } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
+import Features from './Features';
 import PreviewBox from './PreviewBox';
 import Search from './Search';
 import Suggestions from './Suggestions';
@@ -65,15 +66,6 @@ export default function Main() {
         const {
           data: { videoDetails },
         } = data;
-        const { videoId, title, uploadDate, likes, category } = videoDetails;
-        createDownloadStatistic({
-          videoId,
-          title,
-          uploadDate,
-          likes,
-          category,
-          authorId: videoDetails.author.user,
-        });
         setCurrentVideo(videoDetails);
         setConvertionLoading(false);
       } catch (err) {
@@ -86,10 +78,22 @@ export default function Main() {
   };
   const chooseFormat = async (format: string, videoId: string) => {
     try {
-      await getInfos(videoId);
+      const { data } = await getInfos(videoId);
+      const {
+        data: { videoDetails },
+      } = data;
       const downloadUrl = getDownloadUrl(videoId, format);
       setDownloadUrl(downloadUrl);
       if (downloadBtnRef?.current) {
+        const { videoId, title, uploadDate, likes, category } = videoDetails;
+        createDownloadStatistic({
+          videoId,
+          title,
+          uploadDate,
+          likes,
+          category,
+          authorId: videoDetails.author.user,
+        });
         setConvertionLoading(false);
         downloadBtnRef.current.click();
       }
@@ -127,6 +131,7 @@ export default function Main() {
           chooseFormat={chooseFormat}
           isLoading={isSearchLoading}
         />
+        <Features />
       </Container>
       <VisuallyHidden>
         <a href={downloadUrl} download ref={downloadBtnRef}>

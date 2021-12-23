@@ -64,7 +64,7 @@ app.get('/watch', async (req, res) => {
       .status(400)
       .json({ success: false, error: 'No valid YouTube Id!' });
   }
-  const formats = ['mp4', 'mp3', 'mov'];
+  const formats = ['mp4', 'mp3', 'mov', 'flv'];
   let format = f;
   if (formats.includes(f)) {
     format = f;
