@@ -8,4 +8,4 @@ const SearchStatistic = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('searchstatistic', SearchStatistic);
+module.exports = mongoose.model('searchStatistics', SearchStatistic);
