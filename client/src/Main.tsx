@@ -5,7 +5,7 @@ import {
   Heading,
   VisuallyHidden,
 } from '@chakra-ui/react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Features from './Features';
 import PreviewBox from './PreviewBox';
 import Search from './Search';
@@ -22,6 +22,12 @@ export default function Main() {
   const [suggestions, setSuggestions] = useState([]);
   const [error, setError] = useState(false);
   const downloadBtnRef = useRef<HTMLAnchorElement>(null);
+  useEffect(() => {
+    if (downloadUrl.length && downloadBtnRef?.current) {
+      setConvertionLoading(false);
+      downloadBtnRef.current.click();
+    }
+  }, [downloadUrl]);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
   };
@@ -66,10 +72,6 @@ export default function Main() {
       await getInfos(videoId);
       const downloadUrl = getDownloadUrl(videoId, format);
       setDownloadUrl(downloadUrl);
-      if (downloadBtnRef?.current) {
-        setConvertionLoading(false);
-        downloadBtnRef.current.click();
-      }
     } catch (err) {
       setError(true);
     }

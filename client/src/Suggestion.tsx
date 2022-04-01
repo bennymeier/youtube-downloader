@@ -47,9 +47,9 @@ export default function Suggestion(props: Props) {
         <Box p="6">
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
-              fontSize="2xl"
+              fontSize="md"
               fontWeight="semibold"
-              as="h4"
+              as="h2"
               lineHeight="tight"
               isTruncated
               title={snippet.title}
@@ -63,13 +63,11 @@ export default function Suggestion(props: Props) {
             alignContent="center"
             alignItems="center"
           >
-            <Box
-              fontSize="2xl"
-              color={useColorModeValue('gray.800', 'gray.100')}
-            >
-              <Box as="span" color={'gray.600'} fontSize="lg">
+            <Box color={useColorModeValue('gray.800', 'gray.100')}>
+              <Box as="span" color={'gray.600'}>
                 <Menu>
                   <MenuButton
+                    size="xs"
                     as={Button}
                     leftIcon={<DownloadIcon />}
                     rightIcon={<ChevronDownIcon />}
@@ -77,9 +75,14 @@ export default function Suggestion(props: Props) {
                   >
                     Download
                   </MenuButton>
-                  <MenuList color={useColorModeValue('gray.800', 'gray.100')}>
+                  <MenuList
+                    color={useColorModeValue('gray.800', 'gray.100')}
+                    minWidth="unset"
+                  >
                     {formats.map((format) => (
                       <MenuItem
+                        as={Button}
+                        size="xs"
                         key={format.text}
                         onClick={() => chooseFormat(format.format, id.videoId)}
                       >
@@ -93,7 +96,7 @@ export default function Suggestion(props: Props) {
             <Box>
               <Flex>
                 <Tooltip
-                  label={`Published at: ${new Date(
+                  label={`Published at ${new Date(
                     snippet.publishedAt
                   ).toLocaleDateString()}`}
                 >

@@ -87,7 +87,7 @@ app.get('/watch', async (req, res) => {
     db.collection('downloadstatistics').insertOne(videoInfo);
     res.setHeader(
       'Content-disposition',
-      contentDisposition(`${title}.${format}`)
+      contentDisposition(`${title}${format}`)
     );
     ytdl(url, { format, ...reqOptions })
       .on('progress', (chunkLength, downloaded, total) => {
