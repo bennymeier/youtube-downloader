@@ -203,6 +203,19 @@ export default function Footer() {
           <ModalCloseButton />
           <ModalBody>
             <Heading size="sm">
+              {new Date('2022-04-01').toLocaleDateString()}
+            </Heading>
+            <UnorderedList>
+              <ListItem>Updated all packages (e.g. React is now v18)</ListItem>
+              <ListItem>
+                Fixed a bug where sometimes download.htm was downloaded because
+                of a missing promise
+              </ListItem>
+              <ListItem>Smaller download button</ListItem>
+              <ListItem>Smaller menu</ListItem>
+              <ListItem>Changed fontsize from 2xl to xl</ListItem>
+            </UnorderedList>
+            <Heading size="sm">
               {new Date('2021-12-23').toLocaleDateString()}
             </Heading>
             <UnorderedList>
