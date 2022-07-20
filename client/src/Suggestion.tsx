@@ -51,7 +51,6 @@ export default function Suggestion(props: Props) {
               fontWeight="semibold"
               as="h2"
               lineHeight="tight"
-              isTruncated
               title={snippet.title}
             >
               {snippet.title}
