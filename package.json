@@ -12,13 +12,13 @@
   "dependencies": {
     "content-disposition": "^0.5.4",
     "cors": "^2.8.5",
-    "express": "^4.18.1",
-    "mongoose": "^6.4.5",
-    "socket.io": "^4.5.1",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5",
+    "socket.io": "^4.5.2",
     "youtube-api-v3-search": "^1.2.1",
-    "ytdl-core": "^4.11.0"
+    "ytdl-core": "^4.11.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.20"
   }
 }
