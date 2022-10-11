@@ -1,8 +1,8 @@
 @font-face {
-    font-family: 'Special Elite';
-    src: local('Special Elite'), url(SpecialElite-Regular.ttf) format('truetype');
+    font-family: 'Pacifico-Regular';
+    src: local('Pacifico Regular'), url(Pacifico-Regular.ttf) format('truetype');
 }
 
 .special-elite-font {
-    font-family: 'Special Elite', cursive !important;
+    font-family: 'Pacifico Regular', cursive !important;
 }

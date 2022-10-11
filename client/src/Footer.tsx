@@ -203,6 +203,19 @@ export default function Footer() {
           <ModalCloseButton />
           <ModalBody>
             <Heading size="sm">
+              {new Date('2022-10-12').toLocaleDateString()}
+            </Heading>
+            <UnorderedList>
+              <ListItem>
+                Update all packages (e.g. React, Chakra-Ui, ...)
+              </ListItem>
+              <ListItem>Improve button layout</ListItem>
+              <ListItem>
+                Set accordion on YouTube title to show description
+              </ListItem>
+              <ListItem>Remove description tooltip</ListItem>
+            </UnorderedList>
+            <Heading size="sm">
               {new Date('2022-04-01').toLocaleDateString()}
             </Heading>
             <UnorderedList>

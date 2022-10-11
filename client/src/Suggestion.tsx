@@ -15,6 +15,11 @@ import {
   MenuButton,
   MenuItem,
   Button,
+  Link,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
 } from '@chakra-ui/react';
 import { formats } from './utils/helpers';
 
@@ -38,22 +43,34 @@ export default function Suggestion(props: Props) {
         shadow="lg"
         position="relative"
       >
-        <Image
-          src={snippet.thumbnails.medium.url}
-          alt={`Picture of ${snippet.title}`}
-          roundedTop="lg"
-        />
+        <Link
+          href={`https://www.youtube.com/watch?v=${id.videoId}`}
+          target="_blank"
+        >
+          <Image
+            src={snippet.thumbnails.medium.url}
+            alt={`Picture of ${snippet.title}`}
+            roundedTop="lg"
+          />
+        </Link>
 
         <Box p="6">
           <Flex mt="1" justifyContent="space-between" alignContent="center">
-            <Box
-              fontSize="md"
-              fontWeight="semibold"
-              as="h2"
-              lineHeight="tight"
-              title={snippet.title}
-            >
-              {snippet.title}
+            <Box title={snippet.title} mb="2">
+              <Accordion allowToggle>
+                <AccordionItem border="none">
+                  <AccordionButton
+                    fontSize="md"
+                    fontWeight="semibold"
+                    as="h2"
+                    lineHeight="tight"
+                    _hover={{ cursor: 'pointer' }}
+                  >
+                    {snippet.title}
+                  </AccordionButton>
+                  <AccordionPanel>{snippet.description}</AccordionPanel>
+                </AccordionItem>
+              </Accordion>
             </Box>
           </Flex>
 
@@ -66,7 +83,6 @@ export default function Suggestion(props: Props) {
               <Box as="span" color={'gray.600'}>
                 <Menu>
                   <MenuButton
-                    size="xs"
                     as={Button}
                     leftIcon={<DownloadIcon />}
                     rightIcon={<ChevronDownIcon />}
@@ -74,14 +90,9 @@ export default function Suggestion(props: Props) {
                   >
                     Download
                   </MenuButton>
-                  <MenuList
-                    color={useColorModeValue('gray.800', 'gray.100')}
-                    minWidth="unset"
-                  >
+                  <MenuList color={useColorModeValue('gray.800', 'gray.100')}>
                     {formats.map((format) => (
                       <MenuItem
-                        as={Button}
-                        size="xs"
                         key={format.text}
                         onClick={() => chooseFormat(format.format, id.videoId)}
                       >
@@ -101,11 +112,6 @@ export default function Suggestion(props: Props) {
                 >
                   <Box pr="1">
                     <TimeIcon />
-                  </Box>
-                </Tooltip>
-                <Tooltip label={`Description: ${snippet.description}`}>
-                  <Box>
-                    <InfoOutlineIcon />
                   </Box>
                 </Tooltip>
               </Flex>
