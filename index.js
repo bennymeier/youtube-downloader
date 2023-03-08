@@ -86,10 +86,18 @@ app.get('/watch', async (req, res) => {
     };
     db.collection('downloadstatistics').insertOne(videoInfo);
     res.setHeader(
-      'Content-disposition',
+      'Content-Disposition',
       contentDisposition(`${title}${format}`)
     );
-    ytdl(url, { format, ...reqOptions })
+
+    /**
+     * Fix this hack
+     */
+    let filterQuality = 'audioandvideo';
+    if (format === '.mp3') {
+      filterQuality = 'audioonly';
+    }
+    ytdl(url, { format, filter: filterQuality, ...reqOptions })
       .on('progress', (chunkLength, downloaded, total) => {
         // const download = (downloaded / 1024 / 1024).toFixed(2);
         // const tot = (total / 1024 / 1024).toFixed(2);

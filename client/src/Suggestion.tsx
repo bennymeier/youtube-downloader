@@ -1,7 +1,6 @@
 import {
   ChevronDownIcon,
   DownloadIcon,
-  InfoOutlineIcon,
   TimeIcon,
 } from '@chakra-ui/icons';
 import {

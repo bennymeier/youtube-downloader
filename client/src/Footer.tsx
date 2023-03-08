@@ -203,6 +203,16 @@ export default function Footer() {
           <ModalCloseButton />
           <ModalBody>
             <Heading size="sm">
+              {new Date('2023-03-08').toLocaleDateString()}
+            </Heading>
+            <UnorderedList>
+              <ListItem>Fix infinite downloading</ListItem>
+              <ListItem>Fix sound problems</ListItem>
+              <ListItem>
+                Update all packages (e.g. React, Chakra-Ui, ...)
+              </ListItem>
+            </UnorderedList>
+            <Heading size="sm">
               {new Date('2022-10-12').toLocaleDateString()}
             </Heading>
             <UnorderedList>
