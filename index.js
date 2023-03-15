@@ -59,17 +59,18 @@ app.get('/metainfo', async (req, res) => {
 });
 
 app.get('/watch', async (req, res) => {
-  const { v: url, format: f = 'mp4' } = req.query;
+  const { v: url, format: f = '.mp4' } = req.query;
   if (!ytdl.validateID(url) && !ytdl.validateURL(url)) {
     return res
       .status(400)
       .json({ success: false, error: 'No valid YouTube Id!' });
   }
-  const formats = ['mp4', 'mp3', 'mov', 'flv'];
+  const formats = ['.mp4', '.mp3', '.mov', '.flv'];
   let format = f;
   if (formats.includes(f)) {
     format = f;
   }
+  
   try {
     const result = await ytdl.getBasicInfo(url, reqOptions);
     const {
@@ -85,6 +86,8 @@ app.get('/watch', async (req, res) => {
       downloadedFormat: format,
     };
     db.collection('downloadstatistics').insertOne(videoInfo);
+    console.log('Title: ', title);
+    console.log('Format: ', format);
     res.setHeader(
       'Content-Disposition',
       contentDisposition(`${title}${format}`)
