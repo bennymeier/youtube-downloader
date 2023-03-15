@@ -203,6 +203,23 @@ export default function Footer() {
           <ModalCloseButton />
           <ModalBody>
             <Heading size="sm">
+              {new Date('2023-03-15').toLocaleDateString()}
+            </Heading>
+            <UnorderedList>
+              <ListItem>
+                Fix downloading a video once (multiple clicks will trigger only
+                one download)
+              </ListItem>
+              <ListItem>
+                Fix format problem (one dot was forgotten between title and
+                format)
+              </ListItem>
+              <ListItem>
+                Update some packages (e.g. web-vitals, framer-motion and some
+                internal typing packages)
+              </ListItem>
+            </UnorderedList>
+            <Heading size="sm">
               {new Date('2023-03-08').toLocaleDateString()}
             </Heading>
             <UnorderedList>
