@@ -70,7 +70,7 @@ app.get('/watch', async (req, res) => {
   if (formats.includes(f)) {
     format = f;
   }
-  
+
   try {
     const result = await ytdl.getBasicInfo(url, reqOptions);
     const {
@@ -86,8 +86,6 @@ app.get('/watch', async (req, res) => {
       downloadedFormat: format,
     };
     db.collection('downloadstatistics').insertOne(videoInfo);
-    console.log('Title: ', title);
-    console.log('Format: ', format);
     res.setHeader(
       'Content-Disposition',
       contentDisposition(`${title}${format}`)

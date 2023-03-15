@@ -68,10 +68,12 @@ export default function Main() {
     }
   };
   const chooseFormat = async (format: string, videoId: string) => {
+    setDownloadUrl('');
     try {
       await getInfos(videoId);
       const downloadUrl = getDownloadUrl(videoId, format);
       setDownloadUrl(downloadUrl);
+      console.log('SET DOWNLOAD URL: ', downloadUrl);
     } catch (err) {
       setError(true);
     }
