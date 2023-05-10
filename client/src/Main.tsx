@@ -28,9 +28,11 @@ export default function Main() {
       downloadBtnRef.current.click();
     }
   }, [downloadUrl]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
   };
+
   const fetchSuggestions = async () => {
     setError(false);
     setSearchLoading(true);
@@ -43,6 +45,7 @@ export default function Main() {
       console.warn(err);
     }
   };
+
   const handleSearch = async () => {
     const isYouTubeUrl = isYtUrl(input);
     if (!input) {
@@ -67,6 +70,7 @@ export default function Main() {
       fetchSuggestions();
     }
   };
+
   const chooseFormat = async (format: string, videoId: string) => {
     setDownloadUrl('');
     try {
@@ -78,6 +82,7 @@ export default function Main() {
       setError(true);
     }
   };
+
   return (
     <>
       <Container maxW="container.md">
@@ -109,7 +114,7 @@ export default function Main() {
         </Box>
         <Suggestions
           data={suggestions}
-          chooseFormat={chooseFormat}
+        chooseFormat={chooseFormat}
           isLoading={isSearchLoading}
         />
         <Features />
