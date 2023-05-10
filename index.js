@@ -57,7 +57,6 @@ app.get('/metainfo', async (req, res) => {
     return res.status(400).json({ success: false, error });
   }
 });
-
 app.get('/watch', async (req, res) => {
   const { v: url, format: f = '.mp4' } = req.query;
   if (!ytdl.validateID(url) && !ytdl.validateURL(url)) {
@@ -65,7 +64,7 @@ app.get('/watch', async (req, res) => {
       .status(400)
       .json({ success: false, error: 'No valid YouTube Id!' });
   }
-  const formats = ['.mp4', '.mp3', '.mov', '.flv'];
+  const formats = ['.mp4', '.mp3'];
   let format = f;
   if (formats.includes(f)) {
     format = f;
@@ -91,14 +90,37 @@ app.get('/watch', async (req, res) => {
       contentDisposition(`${title}${format}`)
     );
 
-    /**
-     * Fix this hack
-     */
     let filterQuality = 'audioandvideo';
     if (format === '.mp3') {
       filterQuality = 'audioonly';
     }
-    ytdl(url, { format, filter: filterQuality, ...reqOptions })
+
+    const videoFormats = ytdl.filterFormats(result.formats, 'video');
+    const qualityFormats = {
+      mp3: videoFormats.find((format) => format.mimeType.includes('audio/mp4')),
+      '144': videoFormats.find((format) => format.qualityLabel === '144p'),
+      '240': videoFormats.find((format) => format.qualityLabel === '240p'),
+      '360': videoFormats.find((format) => format.qualityLabel === '360p'),
+      '480': videoFormats.find((format) => format.qualityLabel === '480p'),
+      '720': videoFormats.find((format) => format.qualityLabel === '720p'),
+      '1080': videoFormats.find((format) => format.qualityLabel === '1080p'),
+      '2k': videoFormats.find((format) => format.qualityLabel === '1440p'),
+      '4k': videoFormats.find((format) => format.qualityLabel === '2160p'),
+    };
+
+    const chosenFormat = qualityFormats[format.replace('.', '')];
+
+    if (!chosenFormat) {
+      return res
+        .status(400)
+        .json({ success: false, error: 'Invalid format requested!' });
+    }
+
+    ytdl(url, {
+      format: chosenFormat,
+      filter: filterQuality,
+      ...reqOptions,
+    })
       .on('progress', (chunkLength, downloaded, total) => {
         // const download = (downloaded / 1024 / 1024).toFixed(2);
         // const tot = (total / 1024 / 1024).toFixed(2);
