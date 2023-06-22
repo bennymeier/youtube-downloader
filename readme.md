@@ -17,10 +17,14 @@ Just paste a link or search to download your video. The available formats are mp
 
 - Pagination (currently only 5 videos are shown)
 - Playlist-Downloads
+- Show progressbar for download-state
 - Quality choice (480p, 720p, 1080p, 4k)
+- Download History (safe in cache)
+- Fast batch download (insert multiple urls and download automatically)
 - Preview video before download
 - Edit start and end points of a video
 - Contact form for submitting features or bugs
+- Deploy a chrome extension (possible? allowed?)
 - Electron desktop app (.exe file downloadable)
 
 ## Feature on [youtubdle.com](https://youtubdle.com)
