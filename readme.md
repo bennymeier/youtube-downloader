@@ -15,6 +15,12 @@ Just paste a link or search to download your video. The available formats are mp
 
 ## Coming Soon
 
+- Pagination (currently only 5 videos are shown)
+- Playlist-Downloads
+- Quality choice (480p, 720p, 1080p, 4k)
+- Preview video before download
+- Edit start and end points of a video
+- Contact form for submitting features or bugs
 - Electron desktop app (.exe file downloadable)
 
 ## Feature on [youtubdle.com](https://youtubdle.com)
