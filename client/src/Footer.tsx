@@ -203,6 +203,19 @@ export default function Footer() {
           <ModalCloseButton />
           <ModalBody>
             <Heading size="sm">
+              {new Date('2023-06-27').toLocaleDateString()}
+            </Heading>
+            <UnorderedList>
+              <ListItem>
+                Update packages (e.g. react, axios, typings, framer-motion,
+                @chakra-ui/react, typescript, ...)
+              </ListItem>
+              <ListItem>
+                Remove YouTube API Key + MongoDB URI and set it into env.
+                variables
+              </ListItem>
+            </UnorderedList>
+            <Heading size="sm">
               {new Date('2023-03-15').toLocaleDateString()}
             </Heading>
             <UnorderedList>
