@@ -1,8 +1,4 @@
-import {
-  ChevronDownIcon,
-  DownloadIcon,
-  TimeIcon,
-} from '@chakra-ui/icons';
+import { ChevronDownIcon, DownloadIcon, TimeIcon } from '@chakra-ui/icons';
 import {
   Flex,
   Box,

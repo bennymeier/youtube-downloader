@@ -73,7 +73,6 @@ export default function Main() {
       await getInfos(videoId);
       const downloadUrl = getDownloadUrl(videoId, format);
       setDownloadUrl(downloadUrl);
-      console.log('SET DOWNLOAD URL: ', downloadUrl);
     } catch (err) {
       setError(true);
     }
