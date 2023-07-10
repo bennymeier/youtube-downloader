@@ -17,7 +17,7 @@ import {
   AccordionPanel,
   AccordionIcon,
 } from '@chakra-ui/react';
-import { formats } from './utils/helpers';
+import { decodeStr, formats } from './utils/helpers';
 
 interface Props {
   data: any;
@@ -63,7 +63,7 @@ export default function Suggestion(props: Props) {
                     _hover={{ cursor: 'pointer' }}
                     userSelect="none"
                   >
-                    {snippet.title}
+                    {decodeStr(snippet.title)}
                     <AccordionIcon />
                   </AccordionButton>
                   <AccordionPanel>{snippet.description}</AccordionPanel>
