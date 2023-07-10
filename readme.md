@@ -62,13 +62,19 @@ From: `https://www.youtube.com/watch?v=dvgZkm1xWPE` to: `https://www.youtubdle.c
 
 ## How to setup
 
-In the project directory, you can run:
+### Backend
+
+Edit `nodemon.json` and fill in your personal YouTube-API-Key and MongoDB URL (`MONGODB_URL`, `YOUTUBE_KEY`)
+In the project directory you can run:
 
 `yarn install`
 
 `yarn dev` for starting backend
 
-`cd client`
+### Frontend
+
+Switch to frontend with `cd client`
+In the project directory you can run:
 
 `yarn install`
 
