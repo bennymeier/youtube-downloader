@@ -1,40 +1,40 @@
-const DownloadStatistic = require('./download_model');
+const SearchStatistic = require('../models/search_model');
 
-const createDownload = async (req, res) => {
+const createSearch = async (req, res) => {
   const body = req.body;
 
   if (!body) {
     return res.status(400).json({
       success: false,
-      error: 'You must provide a download statistic!',
+      error: 'You must provide a search!',
     });
   }
 
   try {
-    const download = new DownloadStatistic(body);
+    const download = new SearchStatistic(body);
     await download.save();
     return res.status(201).json({
       success: true,
       data: download,
-      message: 'Download Statistics created!',
+      message: 'Search Statistics created!',
     });
   } catch (error) {
     return res.status(400).json({
       success: false,
       error: error,
-      message: 'Download Statistics not created!',
+      message: 'Search Statistics not created!',
     });
   }
 };
 
-const getDownloads = async (req, res) => {
+const getSearchs = async (req, res) => {
   try {
-    const downloads = await DownloadStatistic.find({});
+    const downloads = await SearchStatistic.find({});
 
     if (!downloads.length) {
       return res
         .status(404)
-        .json({ success: false, error: `Downloads Statistics not found` });
+        .json({ success: false, error: `Search Statistics not found` });
     }
 
     return res.status(200).json({ success: true, data: downloads });
@@ -44,6 +44,6 @@ const getDownloads = async (req, res) => {
 };
 
 module.exports = {
-  createDownload,
-  getDownloads,
+  createSearch,
+  getSearchs,
 };

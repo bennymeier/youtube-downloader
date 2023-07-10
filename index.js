@@ -1,12 +1,26 @@
 const express = require('express');
 const cors = require('cors');
 const ytdl = require('ytdl-core');
-const searchYoutube = require('youtube-api-v3-search');
+const { google } = require('googleapis');
 const contentDisposition = require('content-disposition');
 const app = express();
 const port = process.env.PORT || 4000;
 const db = require('./db');
 const statisticRoutes = require('./routes');
+// initialize the Youtube API library
+const youtube = google.youtube({
+  version: 'v3',
+  auth: 'AIzaSyAUWSdU343JHiWTwi-gLdsT47MMm7rLVbg',
+});
+
+async function searchYouTube(searchValue) {
+  const res = await youtube.search.list({
+    part: 'snippet',
+    q: searchValue,
+    type: 'video',
+  });
+  return res.data;
+}
 
 /**
  * Fake a cookie to avoid being identified as a bot.
@@ -32,16 +46,13 @@ app.listen(port, () => console.log(`Server is running on port ${port}`));
  */
 app.get('/suggestions', async (req, res) => {
   const { search } = req.query;
-  const options = {
-    q: search,
-    part: 'snippet',
-    type: 'video',
-  };
   db.collection('searchstatistics').insertOne({ searchInput: search });
   try {
-    const data = await searchYoutube(process.env.YOUTUBE_KEY, options);
+    const data = await searchYouTube(search);
     const { items } = data;
-    return res.status(200).json({ success: true, data: items });
+    return res
+      .status(200)
+      .json({ success: true, data: items, datanewapi: data });
   } catch (error) {
     return res.status(400).json({ success: false, error });
   }
