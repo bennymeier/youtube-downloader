@@ -8,6 +8,9 @@ const port = process.env.PORT || 4000;
 const db = require('./db');
 const statisticRoutes = require('./routes');
 
+/**
+ * Fake a cookie to avoid being identified as a bot.
+ */
 const reqOptions = {
   requestOptions: {
     headers: {
@@ -24,6 +27,9 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
 
+/**
+ * Get suggestions depending on the search query/value.
+ */
 app.get('/suggestions', async (req, res) => {
   const { search } = req.query;
   const options = {
@@ -41,6 +47,9 @@ app.get('/suggestions', async (req, res) => {
   }
 });
 
+/**
+ * Get information about a video.
+ */
 app.get('/metainfo', async (req, res) => {
   const { url } = req.query;
   if (!ytdl.validateID(url) && !ytdl.validateURL(url)) {
@@ -57,6 +66,9 @@ app.get('/metainfo', async (req, res) => {
   }
 });
 
+/**
+ * Download a video with the selected format.
+ */
 app.get('/watch', async (req, res) => {
   const { v: url, format: f = '.mp4' } = req.query;
   if (!ytdl.validateID(url) && !ytdl.validateURL(url)) {
