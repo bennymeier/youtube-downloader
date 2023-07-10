@@ -199,6 +199,35 @@ export default function Footer() {
           <ModalCloseButton />
           <ModalBody>
             <Heading size="sm">
+              {new Date('2023-07-11').toLocaleDateString()}
+            </Heading>
+            <UnorderedList>
+              <ListItem>
+                Remove library youtube-api-search-v3 package because it's
+                unnecessary. Now using the original YouTube-API with the offical
+                package googleapis
+              </ListItem>
+              <ListItem>Add SVG logos</ListItem>
+              <ListItem>Remove ugly font due to new logos</ListItem>
+              <ListItem>Max suggestion results now: 14, before: 5</ListItem>
+              <ListItem>Add coming soon features </ListItem>
+              <ListItem>Implement new design/layout to feature grid</ListItem>
+              <ListItem>
+                Add accordion image to titles in suggestions that user see they
+                can expand the title to show description
+              </ListItem>
+              <ListItem>
+                Organize some internal things like creating folders for the
+                models and controllers
+              </ListItem>
+              <ListItem>
+                Add nothing found message if totalResults are zero
+              </ListItem>
+              <ListItem>Increase skeletons for suggestions to 14</ListItem>
+              <ListItem>Update packages</ListItem>
+              <ListItem>To name just a few..., more to come!</ListItem>
+            </UnorderedList>
+            <Heading size="sm">
               {new Date('2023-06-27').toLocaleDateString()}
             </Heading>
             <UnorderedList>

@@ -59,6 +59,7 @@ export default function Suggestion(props: Props) {
                     fontSize="md"
                     fontWeight="semibold"
                     as="h2"
+                    wordBreak="break-word"
                     lineHeight="tight"
                     _hover={{ cursor: 'pointer' }}
                     userSelect="none"

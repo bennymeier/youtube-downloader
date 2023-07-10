@@ -6,7 +6,7 @@ export default function SuggestionsSkeleton() {
         gridTemplateColumns="repeat(auto-fit, minmax(max(290px, 40%), 1fr))"
         spacing={10}
       >
-        {[...Array(5)].map((_, index) => (
+        {[...Array(14)].map((_, index) => (
           <Stack key={index}>
             <Skeleton height="178px" />
             <Skeleton height="131px" />

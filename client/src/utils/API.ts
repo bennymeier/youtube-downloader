@@ -6,8 +6,13 @@ export const API = axios.create({
   responseType: 'json',
 });
 
-export const getSuggestions = async (searchQuery: string) => {
-  return await API.get(`/suggestions?search=${searchQuery}`);
+export const getSuggestions = async (
+  searchQuery: string,
+  nextPageToken: string = ''
+) => {
+  return await API.get(
+    `/suggestions?search=${searchQuery}&next=${nextPageToken}`
+  );
 };
 
 export const getInfos = async (url: string) => {

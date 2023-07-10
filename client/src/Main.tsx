@@ -4,12 +4,14 @@ import {
   Heading,
   VisuallyHidden,
   useColorMode,
+  Button,
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import Features from './Features';
 import FeaturesComingSoon from './FeaturesComingSoon';
 import LogoBlack from './Icons/LogoBlack';
 import LogoWhite from './Icons/LogoWhite';
+import NothingFoundAlert from './NothingFoundAlert';
 import PreviewBox from './PreviewBox';
 import Search from './Search';
 import Suggestions from './Suggestions';
@@ -24,6 +26,7 @@ export default function Main() {
   const [isSearchLoading, setSearchLoading] = useState(false);
   const [currentVideo, setCurrentVideo] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
+  const [pagingInfo, setPagingInfo] = useState<any>(null);
   const [error, setError] = useState(false);
   const downloadBtnRef = useRef<HTMLAnchorElement>(null);
   useEffect(() => {
@@ -39,7 +42,8 @@ export default function Main() {
     setError(false);
     setSearchLoading(true);
     try {
-      const { data } = await getSuggestions(input);
+      const { data } = await getSuggestions(input, pagingInfo?.nextPageToken);
+      setPagingInfo(data.pagingInfo);
       setSuggestions(data.data);
       setSearchLoading(false);
     } catch (err) {
@@ -89,10 +93,6 @@ export default function Main() {
             <Heading size="2xl" mb="2">
               {colorMode === 'light' ? <LogoBlack /> : <LogoWhite />}
             </Heading>
-            {/* <Text>
-              Convert and download Youtube videos in MP4, MP3, MOV and FLV for
-              free
-            </Text> */}
           </Box>
           <Search
             handleChange={handleChange}
@@ -110,11 +110,22 @@ export default function Main() {
             isLoading={isConvertionLoading}
           />
         </Box>
+        {pagingInfo?.totalResults === 0 && <NothingFoundAlert />}
         <Suggestions
           data={suggestions}
           chooseFormat={chooseFormat}
           isLoading={isSearchLoading}
         />
+        {!!suggestions.length && (
+          <Button
+            onClick={fetchSuggestions}
+            isLoading={isSearchLoading}
+            loadingText="Loading more..."
+            colorScheme="gray"
+          >
+            Load More
+          </Button>
+        )}
         <Features />
         <FeaturesComingSoon />
       </Container>

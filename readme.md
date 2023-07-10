@@ -15,6 +15,7 @@ Just paste a link or search to download your video. The available formats are mp
 
 ## Coming Soon
 
+- Trends Page/Top 100 most downloaded videos (maybe with filters: regionCode, category, ...)
 - Pagination (currently only 5 videos are shown)
 - Playlist-Downloads
 - Show progressbar for download-state

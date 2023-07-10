@@ -13,11 +13,11 @@ const youtube = google.youtube({
   auth: 'AIzaSyAUWSdU343JHiWTwi-gLdsT47MMm7rLVbg',
 });
 
-async function searchYouTube(searchValue) {
+async function searchYouTube(params = {}) {
   const res = await youtube.search.list({
     part: 'snippet',
-    q: searchValue,
     type: 'video',
+    ...params,
   });
   return res.data;
 }
@@ -45,14 +45,20 @@ app.listen(port, () => console.log(`Server is running on port ${port}`));
  * Get suggestions depending on the search query/value.
  */
 app.get('/suggestions', async (req, res) => {
-  const { search } = req.query;
+  const { search, next = null } = req.query;
   db.collection('searchstatistics').insertOne({ searchInput: search });
   try {
-    const data = await searchYouTube(search);
-    const { items } = data;
-    return res
-      .status(200)
-      .json({ success: true, data: items, datanewapi: data });
+    const data = await searchYouTube({
+      q: search,
+      nextPageToken: next,
+      maxResults: 14,
+    });
+    const { items, nextPageToken, pageInfo, regionCode, prevPageToken } = data;
+    return res.status(200).json({
+      success: true,
+      data: items,
+      pagingInfo: { ...pageInfo, nextPageToken, regionCode, prevPageToken },
+    });
   } catch (error) {
     return res.status(400).json({ success: false, error });
   }
