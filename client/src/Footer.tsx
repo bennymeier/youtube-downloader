@@ -22,6 +22,7 @@ import {
   useDisclosure,
   ListItem,
   UnorderedList,
+  useColorMode,
 } from '@chakra-ui/react';
 import { EmailIcon, ExternalLinkIcon } from '@chakra-ui/icons';
 import { ReactNode } from 'react';
@@ -30,6 +31,8 @@ import GithubIcon from './Icons/GithubIcon';
 import HeartIcon from './Icons/HeartIcon';
 import InstagramIcon from './Icons/InstagramIcon';
 import LinkedinIcon from './Icons/LinkedinIcon';
+import LogoBlack from './Icons/LogoBlack';
+import LogoWhite from './Icons/LogoWhite';
 
 const socialMedia = [
   {
@@ -103,7 +106,7 @@ export default function Footer() {
     onOpen: imprintOnOpen,
     onClose: imprintOnClose,
   } = useDisclosure();
-
+  const { colorMode } = useColorMode();
   return (
     <>
       <Box color={useColorModeValue('gray.700', 'gray.200')}>
@@ -118,14 +121,7 @@ export default function Footer() {
             spacing={8}
           >
             <Stack spacing={6} align="flex-start">
-              <Box>
-                <Heading
-                  className="special-elite-font"
-                  color={useColorModeValue('gray.700', 'white')}
-                >
-                  YouTubdle
-                </Heading>
-              </Box>
+              <Box>{colorMode === 'light' ? <LogoBlack /> : <LogoWhite />}</Box>
               <Text fontSize={'sm'}>
                 © {new Date().getFullYear()} YouTubdle. All rights reserved
               </Text>

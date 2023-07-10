@@ -1,8 +1,0 @@
-@font-face {
-    font-family: 'Pacifico-Regular';
-    src: local('Pacifico Regular'), url(Pacifico-Regular.ttf) format('truetype');
-}
-
-.special-elite-font {
-    font-family: 'Pacifico Regular', cursive !important;
-}

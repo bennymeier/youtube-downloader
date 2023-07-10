@@ -5,8 +5,11 @@ import {
   Link,
   useColorModeValue,
   Heading,
+  useColorMode,
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
+import LogoBlackNoSlogan from './Icons/LogoBlackNoSlogan';
+import LogoWhiteNoSlogan from './Icons/LogoWhiteNoSlogan';
 import { isLocalHost } from './utils/helpers';
 
 // const Links = ['Dashboard', 'Projects', 'Team'];
@@ -28,7 +31,7 @@ import { isLocalHost } from './utils/helpers';
 
 export default function Navbar() {
   // const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const { colorMode } = useColorMode();
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -41,7 +44,7 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
           /> */}
           <HStack spacing={8} alignItems={'center'}>
-            <Heading size="lg" className="special-elite-font">
+            <Heading size="lg">
               <Link
                 href={`${
                   isLocalHost
@@ -50,7 +53,11 @@ export default function Navbar() {
                 }`}
                 _hover={{ textDecoration: 'none', color: 'gray.500' }}
               >
-                YouTubdle.com
+                {colorMode === 'light' ? (
+                  <LogoBlackNoSlogan />
+                ) : (
+                  <LogoWhiteNoSlogan />
+                )}
               </Link>
             </Heading>
             {/* <HStack

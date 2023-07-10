@@ -1,6 +1,6 @@
 {
   "env": {
-    "MONGODB_URL": "",
-    "YOUTUBE_KEY": ""
+    "MONGODB_URL": "mongodb+srv://benny:VnaK7yi2nzBwbux8@cluster0.tdsnn.mongodb.net/?retryWrites=true&w=majority",
+    "YOUTUBE_KEY": "AIzaSyAUWSdU343JHiWTwi-gLdsT47MMm7rLVbg"
   }
 }

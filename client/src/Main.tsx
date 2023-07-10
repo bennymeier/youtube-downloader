@@ -1,12 +1,15 @@
 import {
   Container,
   Box,
-  Text,
   Heading,
   VisuallyHidden,
+  useColorMode,
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import Features from './Features';
+import FeaturesComingSoon from './FeaturesComingSoon';
+import LogoBlack from './Icons/LogoBlack';
+import LogoWhite from './Icons/LogoWhite';
 import PreviewBox from './PreviewBox';
 import Search from './Search';
 import Suggestions from './Suggestions';
@@ -14,6 +17,7 @@ import { getInfos, getSuggestions } from './utils/API';
 import { getDownloadUrl, isYtUrl } from './utils/helpers';
 
 export default function Main() {
+  const { colorMode } = useColorMode();
   const [downloadUrl, setDownloadUrl] = useState('');
   const [input, setInput] = useState('');
   const [isConvertionLoading, setConvertionLoading] = useState(false);
@@ -82,13 +86,13 @@ export default function Main() {
       <Container maxW="container.md">
         <Box textAlign="center" fontSize="xl">
           <Box mt="5" mb="5">
-            <Heading className="special-elite-font" size="2xl">
-              YouTube Downloader
+            <Heading size="2xl" mb="2">
+              {colorMode === 'light' ? <LogoBlack /> : <LogoWhite />}
             </Heading>
-            <Text>
+            {/* <Text>
               Convert and download Youtube videos in MP4, MP3, MOV and FLV for
               free
-            </Text>
+            </Text> */}
           </Box>
           <Search
             handleChange={handleChange}
@@ -112,6 +116,7 @@ export default function Main() {
           isLoading={isSearchLoading}
         />
         <Features />
+        <FeaturesComingSoon />
       </Container>
       <VisuallyHidden>
         <a href={downloadUrl} download ref={downloadBtnRef}>
