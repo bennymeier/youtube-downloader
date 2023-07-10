@@ -10,7 +10,7 @@ const statisticRoutes = require('./routes');
 // initialize the Youtube API library
 const youtube = google.youtube({
   version: 'v3',
-  auth: 'AIzaSyAUWSdU343JHiWTwi-gLdsT47MMm7rLVbg',
+  auth: process.env.YOUTUBE_KEY,
 });
 
 async function searchYouTube(params = {}) {
