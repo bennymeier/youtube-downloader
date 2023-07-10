@@ -15,6 +15,7 @@ import {
   AccordionItem,
   AccordionButton,
   AccordionPanel,
+  AccordionIcon,
 } from '@chakra-ui/react';
 import { formats } from './utils/helpers';
 
@@ -60,8 +61,10 @@ export default function Suggestion(props: Props) {
                     as="h2"
                     lineHeight="tight"
                     _hover={{ cursor: 'pointer' }}
+                    userSelect="none"
                   >
                     {snippet.title}
+                    <AccordionIcon />
                   </AccordionButton>
                   <AccordionPanel>{snippet.description}</AccordionPanel>
                 </AccordionItem>
