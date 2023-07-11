@@ -25,7 +25,7 @@ export default function Main() {
   const [isConvertionLoading, setConvertionLoading] = useState(false);
   const [isSearchLoading, setSearchLoading] = useState(false);
   const [currentVideo, setCurrentVideo] = useState(null);
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions] = useState<any[]>([]);
   const [pagingInfo, setPagingInfo] = useState<any>(null);
   const [error, setError] = useState(false);
   const downloadBtnRef = useRef<HTMLAnchorElement>(null);
@@ -44,7 +44,10 @@ export default function Main() {
     try {
       const { data } = await getSuggestions(input, pagingInfo?.nextPageToken);
       setPagingInfo(data.pagingInfo);
-      setSuggestions(data.data);
+      setSuggestions((previousSuggestions) => [
+        ...previousSuggestions,
+        ...data.data,
+      ]);
       setSearchLoading(false);
     } catch (err) {
       setError(true);
@@ -122,6 +125,7 @@ export default function Main() {
             isLoading={isSearchLoading}
             loadingText="Loading more..."
             colorScheme="gray"
+            width="100%"
           >
             Load More
           </Button>

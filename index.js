@@ -50,7 +50,8 @@ app.get('/suggestions', async (req, res) => {
   try {
     const data = await searchYouTube({
       q: search,
-      nextPageToken: next,
+      // nextPageToken: next,
+      pageToken: next,
       maxResults: 14,
     });
     const { items, nextPageToken, pageInfo, regionCode, prevPageToken } = data;
