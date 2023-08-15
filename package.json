@@ -14,7 +14,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "googleapis": "^120.0.0",
-    "mongoose": "^7.3.2",
+    "mongoose": "^7.3.3",
     "socket.io": "^4.7.1",
     "ytdl-core": "^4.11.4"
   },
