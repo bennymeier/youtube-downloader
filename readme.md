@@ -9,6 +9,7 @@ Just paste a link or search to download your video. The available formats are mp
 - Built in search 🔍
 - 4 formats 🤘
 - Fast in grabbing information and downloading 🚀
+- "Show More" Button at the end of suggestions for more suggestions
 - Suggestions 🦾
 - Responsive and built with [Chakra-UI](https://chakra-ui.com/) Framework 😎
 - Also usable on iOS & Android 📱
@@ -16,7 +17,6 @@ Just paste a link or search to download your video. The available formats are mp
 ## Coming Soon
 
 - Trends Page/Top 100 most downloaded videos (maybe with filters: regionCode, category, ...)
-- Pagination (currently only 5 videos are shown)
 - Playlist-Downloads
 - Show progressbar for download-state
 - Quality choice (480p, 720p, 1080p, 4k)

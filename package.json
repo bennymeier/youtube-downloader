@@ -13,10 +13,10 @@
     "content-disposition": "^0.5.4",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "googleapis": "^120.0.0",
-    "mongoose": "^7.3.3",
-    "socket.io": "^4.7.1",
-    "ytdl-core": "^4.11.4"
+    "googleapis": "^126.0.1",
+    "mongoose": "^7.4.5",
+    "socket.io": "^4.7.2",
+    "ytdl-core": "^4.11.5"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

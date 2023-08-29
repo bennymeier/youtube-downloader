@@ -29,7 +29,7 @@ const reqOptions = {
   requestOptions: {
     headers: {
       Cookie:
-        'CONSENT=YES+DE.de+V14+BX; VISITOR_INFO1_LIVE=kYpNG7OoCbY; PREF=al=de&f4=4000000; SID=3geAZGdQt9hIJxt0ST2xySpK_6yaw0kvNarw6v9JTDpZQoKQ5FK1nYqc3dXGQzpM4GRWbA.; __Secure-3PSID=3geAZGdQt9hIJxt0ST2xySpK_6yaw0kvNarw6v9JTDpZQoKQ_zINvfbB7jPNTk2I3oTLYg.; HSID=ApvJR6aSSMIpzAioX; SSID=A4qjlas1kBmX90vX0; APISID=uKTdp7kEoR-Th5wk/Ajvd4cTFRNTvsnnPY; SAPISID=h6Tyds3npH_icpOT/Ae34WsO4j7jVpaLFp; __Secure-3PAPISID=h6Tyds3npH_icpOT/Ae34WsO4j7jVpaLFp; LOGIN_INFO=AFmmF2swRQIhAOZ3RDhhitXMYTD-meEWipRIFho5YaO05aGgteYU2w9SAiA-OKgaB64v_a2AWsOfiJk1JJW6miXXu64EibIGjReNdg:QUQ3MjNmeGs2UTRLWDVYNDNnUVNGRFQ0bThEeGl0ZVpJd2haQldweWpJbFNLTEMtNlJHRmJGTlE2SDc3Rkdyb282elprUllkQnRqc0RJYnNiUzhYNnJ3MENBYjNkcmo2dnFqTFNtMDJCTTJBdV9MMlNvYmdiS2xaOFZvUjFsTk5OX0xFZGQ2M2x1SFZKbEZFSFJ1Z3RXeUxfXzNGZmxsZTdkV3dFWFBOUElMN1B0T0pKemw2aU1F; YSC=hgmjViK_jxo; SIDCC=AJi4QfHbV2YQFgcCjOAOdQG0JWvpGtoxBGtAhNp3rJyU223hoL_CV6Aj3BrLOiQYlZEgVrCwg1I; __Secure-3PSIDCC=AJi4QfGrxA6SlqFGd46AK01jAKdxmwFHWC9u4uFW1t4dnB3lhPCZ-3Gr-Bv2E5LK55HMANtVMQ',
+        'CONSENT=PENDING+280; SOCS=CAISEwgDEgk0ODA3MzU0MDIaAmRlIAEaBgiAqp2aBg; VISITOR_INFO1_LIVE=8bYxodZSJIw; PREF=tz=Europe.Berlin&f6=400&f5=20000&f4=4000000&f7=100; LOGIN_INFO=AFmmF2swRQIhAJmmpd3yROUkuXnWwrLCb2HAzmloXfr96dgzNHekOPOGAiAL5rHaKj9HtWPIKj0u-crdXiWMLIUwn8I1tgkVDLLp6g:QUQ3MjNmejlrVjBheElCa3diQ1ZrVElleEdCT1Z0aVc0OUxZZExvOEtlRno5Z2JhTHBIMlJZVnJWejF1bUxlanppeGRsOW5GcndpeGhGa3A0SFVwSzRpOVFQamNkTzd0dTI1eXpwWXNYRGhjdWZJRDBCM3kxS08zNGJnZVZPcFFGb3dpd1gzYmZ6LURJM2I5OWd3YXNHeThGT3pHaXhjRlRR; YSC=ak77CormrmM; HSID=Atlo_4N65b7NzCjZA; SSID=ANGMgxzJsfE9u_3tD; APISID=3RJTTg6kECNp4S1q/ASvNDFmo5NNkKnglh; SAPISID=d3b75xR-fOnxDd1_/AqesXl2CLtxkg-wP1; __Secure-1PAPISID=d3b75xR-fOnxDd1_/AqesXl2CLtxkg-wP1; __Secure-3PAPISID=d3b75xR-fOnxDd1_/AqesXl2CLtxkg-wP1; SID=aQiAZDeuxqzEQMmp3i7in4FhUgDigllT28vn0LXcuCEUrXuS-L2d9nZyuu_SHvMSo07x4A.; __Secure-1PSID=aQiAZDeuxqzEQMmp3i7in4FhUgDigllT28vn0LXcuCEUrXuSOP85sJ9IyGiuDzxjGOAW6g.; __Secure-3PSID=aQiAZDeuxqzEQMmp3i7in4FhUgDigllT28vn0LXcuCEUrXuSY3xZQD3LCIHTMLF8d4BlyA.; VISITOR_PRIVACY_METADATA=CgJERRIA; __Secure-1PSIDTS=sidts-CjIBSAxbGUS91QD9oXw4xABnlybUEaq4uM0VCV_5WHFDgH_rDEC3ygikfy3M5acIVoGVthAA; __Secure-3PSIDTS=sidts-CjIBSAxbGUS91QD9oXw4xABnlybUEaq4uM0VCV_5WHFDgH_rDEC3ygikfy3M5acIVoGVthAA; SIDCC=APoG2W_YNJLKkPDdclkLwaQssea94HwcX9mgJ2FyySwoDmArku60u_UtYI3HvKAel1okPO2hOA; __Secure-1PSIDCC=APoG2W_H5EmDDIRGfKmV6C8Tw4FJE_68V0KGGGlHkUh8UnotWLBWEDRoI5gGOvRnVCvE2WyeGzY; __Secure-3PSIDCC=APoG2W-iSYntdpFMy0T-egBB9rQrParW40BztRlB64g8c-8ZE3cl9e34oX9wQqZ3o5MwojZEVgE',
     },
   },
 };
@@ -135,8 +135,9 @@ app.get('/watch', async (req, res) => {
         // console.log(`${download}MB of ${tot}MB\n`);
       })
       .pipe(res);
+    res.on('finish', () => console.log('File downloaded!'));
   } catch (err) {
-    console.log('error ', err);
+    console.error('error ', err);
     res.redirect(`http://${req.headers.host}?error=downloadError`);
   }
 });
