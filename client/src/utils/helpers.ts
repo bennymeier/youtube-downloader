@@ -51,3 +51,17 @@ export const decodeStr = (value: string) => {
   const txt = new DOMParser().parseFromString(value, 'text/html');
   return txt.documentElement.textContent;
 };
+
+/**
+ *
+ * @param seconds Seconds to format into minutes and seconds
+ * @returns formatted number
+ */
+export const formatSecondsToMinutesAndSeconds = (seconds: number): string => {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+  const formattedSeconds =
+    remainingSeconds < 10 ? `0${remainingSeconds}` : `${remainingSeconds}`;
+  return `${formattedMinutes}:${formattedSeconds}`;
+};

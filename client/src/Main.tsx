@@ -14,6 +14,7 @@ import LogoWhite from './Icons/LogoWhite';
 import NothingFoundAlert from './NothingFoundAlert';
 import PreviewBox from './PreviewBox';
 import Search from './Search';
+import Sidebar, { HistoryItem } from './Sidebar';
 import Suggestions from './Suggestions';
 import { getInfos, getSuggestions } from './utils/API';
 import { getDownloadUrl, isYtUrl } from './utils/helpers';
@@ -29,15 +30,30 @@ export default function Main() {
   const [pagingInfo, setPagingInfo] = useState<any>(null);
   const [error, setError] = useState(false);
   const downloadBtnRef = useRef<HTMLAnchorElement>(null);
+  const [downloads, setDownloads] = useState<HistoryItem[]>([]);
+
+  useEffect(() => {
+    const storedDownloads = localStorage.getItem('downloads');
+    if (storedDownloads && JSON.parse(storedDownloads)?.length > 0) {
+      setDownloads(JSON.parse(storedDownloads));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('downloads', JSON.stringify(downloads));
+  }, [downloads]);
+
   useEffect(() => {
     if (downloadUrl.length && downloadBtnRef?.current) {
       setConvertionLoading(false);
       downloadBtnRef.current.click();
     }
   }, [downloadUrl]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
   };
+
   const fetchSuggestions = async () => {
     setError(false);
     setSearchLoading(true);
@@ -51,9 +67,10 @@ export default function Main() {
       setSearchLoading(false);
     } catch (err) {
       setError(true);
-      console.warn(err);
+      console.error(err);
     }
   };
+
   const handleSearch = async () => {
     const isYouTubeUrl = isYtUrl(input);
     if (!input) {
@@ -78,18 +95,28 @@ export default function Main() {
       fetchSuggestions();
     }
   };
+
   const chooseFormat = async (format: string, videoId: string) => {
     setDownloadUrl('');
     try {
-      await getInfos(videoId);
+      const videoInfo = await getInfos(videoId);
       const downloadUrl = getDownloadUrl(videoId, format);
       setDownloadUrl(downloadUrl);
+      const downloadInfo = {
+        title: videoInfo.data.data.videoDetails.title,
+        imageUrl: videoInfo.data.data.videoDetails.thumbnails[0].url,
+        videoLength: videoInfo.data.data.videoDetails.lengthSeconds,
+        format,
+        date: new Date(),
+      };
+      setDownloads((prevState) => [...prevState, downloadInfo]);
     } catch (err) {
       setError(true);
     }
   };
   return (
     <>
+      <Sidebar historyData={downloads} />
       <Container maxW="container.md">
         <Box textAlign="center" fontSize="xl">
           <Box mt="5" mb="5">

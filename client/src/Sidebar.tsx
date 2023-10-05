@@ -1,0 +1,107 @@
+import React, { useState } from 'react';
+import {
+  Box,
+  Button,
+  Drawer,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerHeader,
+  DrawerBody,
+  VStack,
+  Image,
+  Text,
+  Flex,
+  DrawerFooter,
+  DrawerCloseButton,
+} from '@chakra-ui/react';
+import { DownloadIcon } from '@chakra-ui/icons';
+import { formatSecondsToMinutesAndSeconds } from './utils/helpers';
+
+export interface HistoryItem {
+  imageUrl: string;
+  title: string;
+  format: string;
+  date: Date;
+  videoLength: string;
+}
+
+const DownloadHistoryItem: React.FC<{ item: HistoryItem }> = React.memo(
+  ({ item }) => (
+    <Box p={2} borderRadius="md" borderWidth="1px" overflow="hidden">
+      <Flex align="center">
+        <Image
+          src={item.imageUrl}
+          alt={item.title}
+          max-width="100px"
+          width="100px"
+          height="auto"
+          mr={2}
+        />
+        <VStack spacing={1} align="flex-start">
+          <Text
+            fontWeight="bold"
+            overflow="hidden"
+            whiteSpace="nowrap"
+            textOverflow="ellipsis"
+            maxWidth="170px"
+          >
+            {item.title}
+          </Text>
+          <Text fontSize="xs">
+            Format: {item.format}
+            {', '}
+            {formatSecondsToMinutesAndSeconds(parseInt(item.videoLength))}min.
+          </Text>
+          <Text fontSize="xs">{new Date(item.date).toUTCString()}</Text>
+        </VStack>
+      </Flex>
+    </Box>
+  )
+);
+
+interface SidebarProps {
+  historyData: HistoryItem[];
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ historyData = [] }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <>
+      <Drawer isOpen={isOpen} placement="left" onClose={toggleSidebar}>
+        <DrawerOverlay>
+          <DrawerContent>
+            <DrawerCloseButton />
+            <DrawerHeader>Download History</DrawerHeader>
+            <DrawerBody p="2">
+              <VStack spacing={4} align="stretch">
+                {historyData.map((item, index) => (
+                  <DownloadHistoryItem key={index} item={item} />
+                ))}
+              </VStack>
+            </DrawerBody>
+            <DrawerFooter>
+              <Text>{historyData.length} Total Downloads</Text>
+            </DrawerFooter>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
+
+      <Box position="fixed" bottom="20px" right="20px" zIndex="10">
+        <Button
+          onClick={toggleSidebar}
+          size="sm"
+          leftIcon={<DownloadIcon />}
+          colorScheme="green"
+        >
+          Download History
+        </Button>
+      </Box>
+    </>
+  );
+};
+
+export default Sidebar;
