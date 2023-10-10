@@ -6,6 +6,10 @@ export const API = axios.create({
   responseType: 'json',
 });
 
+export const getFormats = async (videoURL: string) => {
+  return await API.get(`/formats?url=${encodeURIComponent(videoURL)}`);
+};
+
 export const getSuggestions = async (
   searchQuery: string,
   nextPageToken: string = ''

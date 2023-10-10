@@ -42,6 +42,21 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.listen(port, () => console.log(`Server is running on port ${port}`));
 
 /**
+ * Get available formats of the video given with the URL.
+ */
+app.get('/formats', async (req, res) => {
+  try {
+    const videoURL = req.query.url;
+    const formats = await ytdl.getInfo(videoURL);
+    console.log(formats.formats)
+    res.status(200).json(formats.formats);
+  } catch (error) {
+    console.error('Error while getting the formats:', error);
+    res.status(500).send('Some error occured while getting the formats.');
+  }
+});
+
+/**
  * Get suggestions depending on the search query/value.
  */
 app.get('/suggestions', async (req, res) => {

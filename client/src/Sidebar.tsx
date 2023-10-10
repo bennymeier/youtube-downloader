@@ -13,8 +13,9 @@ import {
   Flex,
   DrawerFooter,
   DrawerCloseButton,
+  Heading,
 } from '@chakra-ui/react';
-import { DownloadIcon } from '@chakra-ui/icons';
+import { DeleteIcon, DownloadIcon } from '@chakra-ui/icons';
 import { formatSecondsToMinutesAndSeconds } from './utils/helpers';
 
 export interface HistoryItem {
@@ -61,9 +62,11 @@ const DownloadHistoryItem: React.FC<{ item: HistoryItem }> = React.memo(
 
 interface SidebarProps {
   historyData: HistoryItem[];
+  handleDeleteHistory: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ historyData = [] }) => {
+const Sidebar: React.FC<SidebarProps> = (props) => {
+  const { handleDeleteHistory, historyData = [] } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -78,13 +81,34 @@ const Sidebar: React.FC<SidebarProps> = ({ historyData = [] }) => {
             <DrawerHeader>Download History</DrawerHeader>
             <DrawerBody p="2">
               <VStack spacing={4} align="stretch">
+                {!!!historyData.length && (
+                  <Heading textAlign="center" userSelect="none">
+                    Empty History
+                    <DownloadIcon width="75px" height="75px" />
+                  </Heading>
+                )}
                 {historyData.map((item, index) => (
                   <DownloadHistoryItem key={index} item={item} />
                 ))}
               </VStack>
             </DrawerBody>
-            <DrawerFooter>
-              <Text>{historyData.length} Total Downloads</Text>
+            <DrawerFooter
+              paddingTop="4"
+              paddingBottom="4"
+              paddingInlineStart="unset"
+              paddingInlineEnd="unset"
+              justifyContent="space-around"
+            >
+              <Button
+                size="sm"
+                onClick={handleDeleteHistory}
+                leftIcon={<DeleteIcon />}
+              >
+                Clear History
+              </Button>
+              <Text userSelect="none">
+                {historyData.length} Total Downloads
+              </Text>
             </DrawerFooter>
           </DrawerContent>
         </DrawerOverlay>

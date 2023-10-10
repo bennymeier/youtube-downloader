@@ -14,6 +14,7 @@ import LogoWhite from './Icons/LogoWhite';
 import NothingFoundAlert from './NothingFoundAlert';
 import PreviewBox from './PreviewBox';
 import Search from './Search';
+import SelectFormat from './SelectFormat';
 import Sidebar, { HistoryItem } from './Sidebar';
 import Suggestions from './Suggestions';
 import { getInfos, getSuggestions } from './utils/API';
@@ -114,9 +115,18 @@ export default function Main() {
       setError(true);
     }
   };
+
+  const handleDeleteHistory = () => {
+    localStorage.removeItem('downloads');
+    setDownloads([]);
+  };
+
   return (
     <>
-      <Sidebar historyData={downloads} />
+      <Sidebar
+        historyData={downloads}
+        handleDeleteHistory={handleDeleteHistory}
+      />
       <Container maxW="container.md">
         <Box textAlign="center" fontSize="xl">
           <Box mt="5" mb="5">
