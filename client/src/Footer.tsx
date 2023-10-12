@@ -199,6 +199,22 @@ export default function Footer() {
           <ModalCloseButton />
           <ModalBody>
             <Heading size="sm">
+              {new Date('2023-10-12').toLocaleDateString()}
+            </Heading>
+            <UnorderedList>
+              <ListItem>Update packages</ListItem>
+              <ListItem>
+                Fix some bugs where people can't download a video
+              </ListItem>
+              <ListItem>
+                Add sidebar which shows a download history now
+              </ListItem>
+              <ListItem>
+                Add button to delete history (history is only saved in your
+                localStorage in your browser)
+              </ListItem>
+            </UnorderedList>
+            <Heading size="sm">
               {new Date('2023-07-11').toLocaleDateString()}
             </Heading>
             <UnorderedList>
