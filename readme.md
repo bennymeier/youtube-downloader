@@ -11,6 +11,7 @@ Just paste a link or search to download your video. The available formats are mp
 - Fast in grabbing information and downloading 🚀
 - "Show More" Button at the end of suggestions for more suggestions
 - Suggestions 🦾
+- Download History (safe in localStorage) 🗃️
 - Responsive and built with [Chakra-UI](https://chakra-ui.com/) Framework 😎
 - Also usable on iOS & Android 📱
 
@@ -20,7 +21,6 @@ Just paste a link or search to download your video. The available formats are mp
 - Playlist-Downloads
 - Show progressbar for download-state
 - Quality choice (480p, 720p, 1080p, 4k)
-- Download History (safe in cache)
 - Fast batch download (insert multiple urls and download automatically)
 - Preview video before download
 - Edit start and end points of a video
