@@ -13,8 +13,8 @@
     "content-disposition": "^0.5.4",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "googleapis": "^126.0.1",
-    "mongoose": "^7.6.1",
+    "googleapis": "^128.0.0",
+    "mongoose": "^8.0.0",
     "socket.io": "^4.7.2",
     "ytdl-core": "^4.11.5"
   },
