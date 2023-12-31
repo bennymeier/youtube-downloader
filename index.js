@@ -46,7 +46,6 @@ app.get('/formats', async (req, res) => {
   try {
     const videoURL = req.query.url;
     const formats = await ytdl.getInfo(videoURL);
-    console.log(formats.formats);
     res.status(200).json(formats.formats);
   } catch (error) {
     console.error('Error while getting the formats:', error);
@@ -98,7 +97,7 @@ app.get('/metainfo', async (req, res) => {
     const result = await ytdl.getInfo(url);
     return res.status(200).json({ success: true, data: result });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return res.status(400).json({ success: false, error });
   }
 });
@@ -154,7 +153,6 @@ app.get('/watch', async (req, res) => {
         // console.log(`${download}MB of ${tot}MB\n`);
       })
       .pipe(res);
-    res.on('finish', () => console.log('File downloaded!'));
   } catch (err) {
     console.error('error ', err);
     res.redirect(`http://${req.headers.host}?error=downloadError`);
