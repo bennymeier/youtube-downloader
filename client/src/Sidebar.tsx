@@ -46,6 +46,7 @@ const DownloadHistoryItem: React.FC<{ item: HistoryItem }> = React.memo(
             whiteSpace="nowrap"
             textOverflow="ellipsis"
             maxWidth="170px"
+            title={item.title}
           >
             {item.title}
           </Text>
@@ -53,7 +54,7 @@ const DownloadHistoryItem: React.FC<{ item: HistoryItem }> = React.memo(
             Length:{' '}
             {formatSecondsToMinutesAndSeconds(parseInt(item.videoLength))}
           </Text>
-          <Text fontSize="xs">
+          <Text fontSize="xs" title={new Date(item.date).toUTCString()}>
             Downloaded: {new Date(item.date).toLocaleDateString()}
           </Text>
         </VStack>
