@@ -1,5 +1,5 @@
 import { Box, SimpleGrid, Heading } from '@chakra-ui/react';
-import Suggestion from './Suggestion';
+import Suggestion from './SuggestionV2';
 import SuggestionsSkeleton from './SuggestionsSkeleton';
 
 interface Props {

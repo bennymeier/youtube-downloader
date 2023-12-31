@@ -5,6 +5,7 @@ import {
   VisuallyHidden,
   useColorMode,
   Button,
+  useToast,
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import Features from './Features';
@@ -22,6 +23,7 @@ import { getDownloadUrl, isYtUrl } from './utils/helpers';
 
 export default function Main() {
   const { colorMode } = useColorMode();
+  const toast = useToast();
   const [downloadUrl, setDownloadUrl] = useState('');
   const [input, setInput] = useState('');
   const [isConvertionLoading, setConvertionLoading] = useState(false);
@@ -68,6 +70,20 @@ export default function Main() {
       setSearchLoading(false);
     } catch (err) {
       setError(true);
+      // if (err && err.status === 403) {
+      toast({
+        title: 'YouTube Search Limit exceeded',
+        description:
+          'You can search again tomorrow. Just paste the URL into the searchfield. This will still works. The YouTube-API allows only a few search requests.',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      });
+      // }
+      setTimeout(() => {
+        setError(false);
+        setInput('');
+      }, 2000);
       console.error(err);
     }
   };

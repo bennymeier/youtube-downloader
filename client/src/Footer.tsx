@@ -199,6 +199,14 @@ export default function Footer() {
           <ModalCloseButton />
           <ModalBody>
             <Heading size="sm">
+              {new Date('2023-12-31').toLocaleDateString()}
+            </Heading>
+            <UnorderedList>
+              <ListItem>Update packages</ListItem>
+              <ListItem>Change UI of suggestion cards</ListItem>
+              <ListItem>Change UI of download history in sidebar</ListItem>
+            </UnorderedList>
+            <Heading size="sm">
               {new Date('2023-10-12').toLocaleDateString()}
             </Heading>
             <UnorderedList>

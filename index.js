@@ -59,8 +59,8 @@ app.get('/formats', async (req, res) => {
  */
 app.get('/suggestions', async (req, res) => {
   const { search, next = null } = req.query;
-  db.collection('searchstatistics').insertOne({ searchInput: search });
   try {
+    db.collection('searchstatistics').insertOne({ searchInput: search });
     const data = await searchYouTube({
       q: search,
       // nextPageToken: next,
@@ -74,7 +74,13 @@ app.get('/suggestions', async (req, res) => {
       pagingInfo: { ...pageInfo, nextPageToken, regionCode, prevPageToken },
     });
   } catch (error) {
-    return res.status(400).json({ success: false, error });
+    console.error(error);
+    if (error.status === 403) {
+      return res
+        .status(403)
+        .json({ success: false, error, limitExceeded: true });
+    }
+    return res.status(400).json({ success: false, error, limitExceeded: true });
   }
 });
 
