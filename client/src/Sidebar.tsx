@@ -14,6 +14,7 @@ import {
   DrawerFooter,
   DrawerCloseButton,
   Heading,
+  Divider,
 } from '@chakra-ui/react';
 import { DeleteIcon, DownloadIcon } from '@chakra-ui/icons';
 import { formatSecondsToMinutesAndSeconds } from './utils/helpers';
@@ -28,7 +29,7 @@ export interface HistoryItem {
 
 const DownloadHistoryItem: React.FC<{ item: HistoryItem }> = React.memo(
   ({ item }) => (
-    <Box p={2} borderRadius="md" borderWidth="1px" overflow="hidden">
+    <Box p={2} overflow="hidden">
       <Flex align="center">
         <Image
           src={item.imageUrl}
@@ -49,11 +50,12 @@ const DownloadHistoryItem: React.FC<{ item: HistoryItem }> = React.memo(
             {item.title}
           </Text>
           <Text fontSize="xs">
-            Format: {item.format}
-            {', '}
-            {formatSecondsToMinutesAndSeconds(parseInt(item.videoLength))}min.
+            Length:{' '}
+            {formatSecondsToMinutesAndSeconds(parseInt(item.videoLength))}
           </Text>
-          <Text fontSize="xs">{new Date(item.date).toUTCString()}</Text>
+          <Text fontSize="xs">
+            Downloaded: {new Date(item.date).toLocaleDateString()}
+          </Text>
         </VStack>
       </Flex>
     </Box>
@@ -79,6 +81,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
           <DrawerContent>
             <DrawerCloseButton />
             <DrawerHeader>Download History</DrawerHeader>
+            <Divider borderBottomWidth="2px" />
             <DrawerBody p="2">
               <VStack spacing={4} align="stretch">
                 {!!!historyData.length && (
@@ -88,7 +91,10 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                   </Heading>
                 )}
                 {historyData.map((item, index) => (
-                  <DownloadHistoryItem key={index} item={item} />
+                  <Box key={index}>
+                    <DownloadHistoryItem item={item} />
+                    <Divider />
+                  </Box>
                 ))}
               </VStack>
             </DrawerBody>
