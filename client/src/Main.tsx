@@ -6,6 +6,10 @@ import {
   useColorMode,
   Button,
   useToast,
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
 } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import Features from './Features';
@@ -149,6 +153,24 @@ export default function Main() {
             <Heading size="2xl" mb="2">
               {colorMode === 'light' ? <LogoBlack /> : <LogoWhite />}
             </Heading>
+          </Box>
+          <Box>
+            <Alert
+              status="error"
+              variant="subtle"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              textAlign="center"
+            >
+              <AlertIcon />
+              <AlertTitle>Download Error!</AlertTitle>
+              <AlertDescription>
+                Some users are currently having problems downloading something.
+                We are aware of the error and are in the process of fixing the
+                problem.
+              </AlertDescription>
+            </Alert>
           </Box>
           <Search
             handleChange={handleChange}
