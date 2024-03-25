@@ -33,6 +33,7 @@ import InstagramIcon from './Icons/InstagramIcon';
 import LinkedinIcon from './Icons/LinkedinIcon';
 import LogoBlack from './Icons/LogoBlack';
 import LogoWhite from './Icons/LogoWhite';
+import ContactForm from './ContactForm';
 
 const socialMedia = [
   {
@@ -106,6 +107,13 @@ export default function Footer() {
     onOpen: imprintOnOpen,
     onClose: imprintOnClose,
   } = useDisclosure();
+
+  const {
+    isOpen: contactFormIsOpen,
+    onOpen: contactFormOnOpen,
+    onClose: contactFormOnClose,
+  } = useDisclosure();
+
   const { colorMode } = useColorMode();
   return (
     <>
@@ -160,6 +168,9 @@ export default function Footer() {
                 />
               </Stack>
               <Box>
+                <Button onClick={contactFormOnOpen} mr="2" mt="6">
+                  Contact
+                </Button>
                 <Button onClick={changeLogOnOpen} mr="2" mt="6">
                   Changelog
                 </Button>
@@ -192,12 +203,33 @@ export default function Footer() {
           </Box>
         </Container>
       </Box>
+
+
+      <Modal onClose={contactFormOnClose} size="xl" isOpen={contactFormIsOpen}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Contact</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <ContactForm handleClose={contactFormOnClose} />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+
       <Modal onClose={changeLogOnClose} size="xl" isOpen={changeLogIsOpen}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Changelog</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            <Heading size="sm">
+              {new Date('2024-03-25').toLocaleDateString()}
+            </Heading>
+            <UnorderedList>
+              <ListItem>Update packages</ListItem>
+              <ListItem>Add contact form</ListItem>
+              <ListItem>Change the backend from JavaScript to TypeScript</ListItem>
+            </UnorderedList>
             <Heading size="sm">
               {new Date('2023-12-31').toLocaleDateString()}
             </Heading>

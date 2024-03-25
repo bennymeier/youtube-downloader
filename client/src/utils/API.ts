@@ -22,3 +22,7 @@ export const getSuggestions = async (
 export const getInfos = async (url: string) => {
   return await API.get(`/metainfo?url=${url}`);
 };
+
+export const sendContactForm = async (formData: { email: string, issueType: string, description: string }) => {
+  return await API.post(`/contact`, formData);
+};

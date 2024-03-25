@@ -2,27 +2,29 @@ import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const transporter = nodemailer.createTransport({
-    host: process.env.MAIL_HOST, 
-    port: 993,
-    secure: false,
-    auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PW,
-    },
-});
+interface MailOptions {
+    from: string;
+    to: string;
+    subject: string;
+    text: string;
+}
 
-const mailOptions = {
-    from: `"YouTubdle.com" ${process.env.MAIL_USER}`,
-    to: "meier.benjamin@web.de",
-    subject: "YouTubdle.com Form",
-    text: "Hier könnten die Daten deines Formulars stehen",
-    // html: "<b>Hier könnten die Daten deines Formulars stehen</b>",
-};
+export async function sendMail(mailOptions: MailOptions) {
+    const transporter = nodemailer.createTransport({
+        host: process.env.MAIL_HOST,
+        port: 465,
+        secure: true,
+        auth: {
+            user: process.env.MAIL_USER,
+            pass: process.env.MAIL_PW,
+        },
+    });
 
-transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-        return console.log(`Error: ${error}`);
+    try {
+        let info = await transporter.sendMail(mailOptions);
+        return { success: true, messageId: info.messageId };
+    } catch (error) {
+        console.error('Error sending mail:', error);
+        return { success: false, error };
     }
-    console.log(`Message sent: ${info.response}`);
-});
+}
