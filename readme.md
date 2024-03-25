@@ -1,8 +1,6 @@
 # YouTube Downloader built with React & Node.js
 
-<p align="center">
 Just paste a link or search to download your video. The available formats are mp4, mp3, mov and flv.
-</p>
 
 ## Features
 
@@ -68,15 +66,15 @@ From: `https://www.youtube.com/watch?v=dvgZkm1xWPE` to: `https://www.youtubdle.c
 Edit `nodemon.json` and fill in your personal YouTube-API-Key and MongoDB URL (`MONGODB_URL`, `YOUTUBE_KEY`)
 In the project directory you can run:
 
-`yarn install`
+`npm install`
 
-`yarn dev` for starting backend
+`npm run dev` for starting backend
 
 ### Frontend
 
 Switch to frontend with `cd client`
 In the project directory you can run:
 
-`yarn install`
+`npm install`
 
-`yarn start` for starting frontend
+`npm run start` for starting frontend

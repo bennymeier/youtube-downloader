@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
 
-const DownloadStatistic = new Schema(
+const DownloadStatisticSchema = new mongoose.Schema(
   {
     videoId: { required: true, type: String },
     title: { required: true, type: String },
@@ -14,4 +13,4 @@ const DownloadStatistic = new Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model('downloadstatistics', DownloadStatistic);
+export default mongoose.model('downloadstatistics', DownloadStatisticSchema);

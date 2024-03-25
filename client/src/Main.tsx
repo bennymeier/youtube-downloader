@@ -61,6 +61,13 @@ export default function Main() {
     setInput(event.target.value);
   };
 
+  const reset = () => {
+    setError(false);
+    setInput('');
+    setSearchLoading(false);
+    setConvertionLoading(false);
+  }
+
   const fetchSuggestions = async () => {
     setError(false);
     setSearchLoading(true);
@@ -85,12 +92,12 @@ export default function Main() {
       });
       // }
       setTimeout(() => {
-        setError(false);
-        setInput('');
+        reset();
       }, 2000);
       console.error(err);
     }
   };
+
 
   const handleSearch = async () => {
     const isYouTubeUrl = isYtUrl(input);
@@ -153,24 +160,6 @@ export default function Main() {
             <Heading size="2xl" mb="2">
               {colorMode === 'light' ? <LogoBlack /> : <LogoWhite />}
             </Heading>
-          </Box>
-          <Box>
-            <Alert
-              status="error"
-              variant="subtle"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-              textAlign="center"
-            >
-              <AlertIcon />
-              <AlertTitle>Download Error!</AlertTitle>
-              <AlertDescription>
-                Some users are currently having problems downloading something.
-                We are aware of the error and are in the process of fixing the
-                problem.
-              </AlertDescription>
-            </Alert>
           </Box>
           <Search
             handleChange={handleChange}

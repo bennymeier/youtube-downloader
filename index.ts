@@ -1,26 +1,38 @@
-const express = require('express');
-const cors = require('cors');
-const ytdl = require('ytdl-core');
-const { google } = require('googleapis');
-const contentDisposition = require('content-disposition');
-const app = express();
-const port = process.env.PORT || 4000;
-const db = require('./db');
-const statisticRoutes = require('./routes');
-// initialize the Youtube API library
+import express, { Express, Request, Response } from 'express';
+import cors from 'cors';
+import ytdl from 'ytdl-core';
+import { google } from 'googleapis';
+import contentDisposition from 'content-disposition';
+import db from './db';
+import statisticRoutes from './routes';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const app: Express = express();
+const port: string | number = process.env.PORT || 4000;
+
 const youtube = google.youtube({
   version: 'v3',
   auth: process.env.YOUTUBE_KEY,
 });
 
-async function searchYouTube(params = {}) {
+
+interface SearchParams {
+  q?: string;
+  pageToken?: string;
+  maxResults?: number;
+}
+
+async function searchYouTube(params: SearchParams = {}) {
   const res = await youtube.search.list({
+    // @ts-ignore
     part: 'snippet',
     type: 'video',
     ...params,
   });
-  return res.data;
+  return (res as any).data;
 }
+
 
 /**
  * Fake a cookie to avoid being identified as a bot.
@@ -34,50 +46,57 @@ const reqOptions = {
   },
 };
 
+app.listen(port, () => console.log(`Server is running on port ${port}`));
 app.use(cors());
 app.use(express.json());
 app.use('/api', statisticRoutes);
-const server = app.listen(port, () => console.log(`Server is running on port ${port}`));
 
-/**
- * Get available formats of the video given with the URL.
- */
-app.get('/formats', async (req, res) => {
+app.get('/formats', async (req: Request, res: Response) => {
   try {
-    const videoURL = req.query.url;
+    const videoURL: string = req.query.url as string;
     const formats = await ytdl.getInfo(videoURL);
     res.status(200).json(formats.formats);
   } catch (error) {
     console.error('Error while getting the formats:', error);
-    res.status(500).send('Some error occured while getting the formats.');
+    res.status(500).send('Some error occurred while getting the formats.');
   }
 });
+
+interface YouTubeSearchResult {
+  items: any[];
+  nextPageToken: string;
+  pageInfo: any;
+  regionCode: string;
+  prevPageToken?: string;
+}
 
 /**
  * Get suggestions depending on the search query/value.
  */
-app.get('/suggestions', async (req, res) => {
-  const { search, next = null } = req.query;
+app.get('/suggestions', async (req: Request, res: Response) => {
+  const { search, next = null } = req.query as { search?: string; next?: string | null };
+
   try {
-    db.collection('searchstatistics').insertOne({ searchInput: search });
+    await db.collection('searchstatistics').insertOne({ searchInput: search });
+
     const data = await searchYouTube({
       q: search,
       // nextPageToken: next,
-      pageToken: next,
+      pageToken: next as any,
       maxResults: 14,
     });
+
+    // @ts-ignore
     const { items, nextPageToken, pageInfo, regionCode, prevPageToken } = data;
     return res.status(200).json({
       success: true,
       data: items,
       pagingInfo: { ...pageInfo, nextPageToken, regionCode, prevPageToken },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     if (error.status === 403) {
-      return res
-        .status(403)
-        .json({ success: false, error, limitExceeded: true });
+      return res.status(403).json({ success: false, error, limitExceeded: true });
     }
     return res.status(400).json({ success: false, error, limitExceeded: true });
   }
@@ -86,17 +105,17 @@ app.get('/suggestions', async (req, res) => {
 /**
  * Get information about a video.
  */
-app.get('/metainfo', async (req, res) => {
-  const { url } = req.query;
+app.get('/metainfo', async (req: Request, res: Response) => {
+  const url = req.query.url as string;
+
   if (!ytdl.validateID(url) && !ytdl.validateURL(url)) {
-    return res
-      .status(400)
-      .json({ success: false, error: 'No valid YouTube Id!' });
+    return res.status(400).json({ success: false, error: 'No valid YouTube Id!' });
   }
+
   try {
     const result = await ytdl.getInfo(url);
     return res.status(200).json({ success: true, data: result });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return res.status(400).json({ success: false, error });
   }
@@ -105,18 +124,18 @@ app.get('/metainfo', async (req, res) => {
 /**
  * Download a video with the selected format.
  */
-app.get('/watch', async (req, res) => {
-  const { v: url, format: f = '.mp4' } = req.query;
-  if (!ytdl.validateID(url) && !ytdl.validateURL(url)) {
-    return res
-      .status(400)
-      .json({ success: false, error: 'No valid YouTube Id!' });
+app.get('/watch', async (req: Request, res: Response) => {
+  const { v: url, format: f = '.mp4' } = req.query as {
+    v?: string;
+    format?: string;
+  };
+
+  if (url === undefined || (!ytdl.validateID(url) && !ytdl.validateURL(url))) {
+    return res.status(400).json({ success: false, error: 'No valid YouTube Id!' });
   }
+
   const formats = ['.mp4', '.mp3', '.mov', '.flv'];
-  let format = f;
-  if (formats.includes(f)) {
-    format = f;
-  }
+  let format: string = formats.includes(f) ? f : '.mp4';
 
   try {
     const result = await ytdl.getBasicInfo(url);
@@ -132,29 +151,17 @@ app.get('/watch', async (req, res) => {
       authorId: author.id,
       downloadedFormat: format,
     };
-    db.collection('downloadstatistics').insertOne(videoInfo);
-    res.setHeader(
-      'Content-Disposition',
-      contentDisposition(`${title}${format}`)
-    );
 
-    /**
-     * Fix this hack
-     */
-    let filterQuality = 'audioandvideo';
-    if (format === '.mp3') {
-      filterQuality = 'audioonly';
-    }
-    ytdl(url, { format, filter: filterQuality })
-      .on('progress', (chunkLength, downloaded, total) => {
-        // const download = (downloaded / 1024 / 1024).toFixed(2);
-        // const tot = (total / 1024 / 1024).toFixed(2);
-        // const progress = Math.ceil((download / tot) * 100);
-        // console.log(`${download}MB of ${tot}MB\n`);
+    await db.collection('downloadstatistics').insertOne(videoInfo);
+    res.setHeader('Content-Disposition', contentDisposition(`${title}${format}`));
+
+    let filterQuality: 'audioandvideo' | 'audioonly' = format === '.mp3' ? 'audioonly' : 'audioandvideo';
+    ytdl(url, { filter: filterQuality })
+      .on('progress', (chunkLength: number, downloaded: number, total: number) => {
       })
       .pipe(res);
-  } catch (err) {
-    console.error('error ', err);
+  } catch (err: any) {
+    console.error('error', err);
     res.redirect(`http://${req.headers.host}?error=downloadError`);
   }
 });

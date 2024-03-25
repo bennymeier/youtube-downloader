@@ -1,6 +1,5 @@
 {
-  "env": {
-    "MONGODB_URL": "mongodb+srv://benny:swootsi1@cluster0.tdsnn.mongodb.net/?retryWrites=true&w=majority",
-    "YOUTUBE_KEY": "AIzaSyAUWSdU343JHiWTwi-gLdsT47MMm7rLVbg"
-  }
+  "watch": ["**/*.ts"],
+  "ext": "ts",
+  "exec": "ts-node index.ts"
 }

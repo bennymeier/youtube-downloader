@@ -1,6 +1,7 @@
-const DownloadStatistic = require('../models/download_model');
+import { Request, Response } from 'express';
+import DownloadStatistic from '../models/download_model';
 
-const createDownload = async (req, res) => {
+export const createDownload = async (req: Request, res: Response) => {
   const body = req.body;
 
   if (!body) {
@@ -21,13 +22,13 @@ const createDownload = async (req, res) => {
   } catch (error) {
     return res.status(400).json({
       success: false,
-      error: error,
+      error,
       message: 'Download Statistics not created!',
     });
   }
 };
 
-const getDownloads = async (req, res) => {
+export const getDownloads = async (req: Request, res: Response) => {
   try {
     const downloads = await DownloadStatistic.find({});
 
@@ -41,9 +42,4 @@ const getDownloads = async (req, res) => {
   } catch (error) {
     return res.status(400).json({ success: false, error });
   }
-};
-
-module.exports = {
-  createDownload,
-  getDownloads,
 };
