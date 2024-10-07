@@ -36,5 +36,5 @@ jobs:
           server: ftp://youtubdle.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: dist/
+          local-dir: build/
           server-dir: /
