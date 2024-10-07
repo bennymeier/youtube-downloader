@@ -19,7 +19,7 @@ jobs:
           node-version: 22
 
       - name: Install server dependencies
-        run: npm install
+        run: cd server && npm install
 
       - name: Install client dependencies
         run: cd client && npm install
@@ -31,7 +31,7 @@ jobs:
         run: |
           mkdir -p upload
           cp -r client/build upload/
-          cp -r . upload/
+          cp -r server/ upload/
 
       - name: Start server
         run: nohup npm run start &

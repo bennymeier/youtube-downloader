@@ -17,9 +17,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "googleapis": "^144.0.0",
-    "mongoose": "^8.7.0",
     "nodemailer": "^6.9.15",
-    "socket.io": "^4.8.0",
     "ytdl-core": "^4.11.5"
   },
   "devDependencies": {
