@@ -30,8 +30,8 @@ jobs:
       - name: Prepare upload directory
         run: |
           mkdir -p upload
-          cp -r client/build upload/
-          cp -r server/ upload/
+          cp -r client/build/* upload/
+          cp -r server/* upload/
 
       - name: Start server
         run: nohup npm run start &
@@ -42,5 +42,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          dangerous-clean-slate: true
           local-dir: ./upload/
           server-dir: /
