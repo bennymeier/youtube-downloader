@@ -28,7 +28,7 @@ jobs:
         run: cd client && npm run build
 
       - name: Start server
-        run: npm run start
+        run: nohup npm run start &
 
       - name: Upload to FTP server
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -37,4 +37,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: dist
-          server-dir: /httpdocs
+          server-dir: /
