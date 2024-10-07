@@ -3,7 +3,7 @@ name: Build and Deploy to FTP
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build:
