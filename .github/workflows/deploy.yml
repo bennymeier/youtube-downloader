@@ -33,15 +33,16 @@ jobs:
           cp -r client/build/* upload/
           cp -r server/* upload/
 
+
+          - name: Upload to FTP server
+          uses: SamKirkland/FTP-Deploy-Action@4.3.0
+          with:
+            server: ${{ secrets.FTP_SERVER }}
+            username: ${{ secrets.FTP_USERNAME }}
+            password: ${{ secrets.FTP_PASSWORD }}
+            dangerous-clean-slate: true
+            local-dir: ./upload/
+            server-dir: /
+
       - name: Start server
         run: cd server && nohup npm run start &
-
-      - name: Upload to FTP server
-        uses: SamKirkland/FTP-Deploy-Action@4.3.0
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          dangerous-clean-slate: true
-          local-dir: ./upload/
-          server-dir: /
