@@ -18,11 +18,17 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install dependencies
+      - name: Install server dependencies
         run: npm install
 
-      - name: Build project
-        run: npm run build
+      - name: Install client dependencies
+        run: cd client && npm install
+
+      - name: Build client
+        run: cd client && npm run build
+
+      - name: Start server
+        run: npm run start
 
       - name: Upload to FTP server
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
