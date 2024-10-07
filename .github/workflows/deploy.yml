@@ -39,7 +39,7 @@ jobs:
       - name: Upload to FTP server
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
-          server: ftp://youtubdle.com
+          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./upload/
