@@ -34,7 +34,7 @@ jobs:
           cp -r server/* upload/
 
       - name: Start server
-        run: nohup npm run start &
+        run: cd server && nohup npm run start &
 
       - name: Upload to FTP server
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
