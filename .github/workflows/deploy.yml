@@ -19,9 +19,6 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install server dependencies
-        run: cd server && npm install
-
       - name: Install client dependencies
         run: cd client && npm install
 
@@ -43,5 +40,8 @@ jobs:
           local-dir: ./upload/
           server-dir: /
 
+      - name: Install server dependencies
+        run: npm install
+
       - name: Start server
-        run: cd server && nohup npm run start &
+        run: nohup npm run start &
