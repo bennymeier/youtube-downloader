@@ -27,6 +27,12 @@ jobs:
       - name: Build client
         run: cd client && npm run build
 
+      - name: Prepare upload directory
+        run: |
+          mkdir -p upload
+          cp -r client/build upload/
+          cp -r . upload/
+
       - name: Start server
         run: nohup npm run start &
 
@@ -36,5 +42,5 @@ jobs:
           server: ftp://youtubdle.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: build/
+          local-dir: ./upload/
           server-dir: /
